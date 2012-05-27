@@ -8,10 +8,10 @@
 
 % Language
 \usepackage{polyglossia}
-	\setmainlanguage{english}
 	\setmainlanguage{german}
+	\setotherlanguage{english}
 % Citations
-\usepackage[style=alphabetic]{biblatex}
+\usepackage[style=alphabetic, backend=biber]{biblatex}
 	\addbibresource{References.bib}
 % Define colors
 \usepackage{color}
@@ -44,10 +44,10 @@
 
 % -- Fonts ---------------------------------------------------------------------
 
-\setmainfont[Mapping=tex-text]{TeX Gyre Pagella}
-\setitalicmainfont[Mapping=tex-text]{Menlo}
+\defaultfontfeatures{Numbers=Lining}
+\setmainfont[Mapping=tex-text]{EB Garamond}
 \setsansfont[Mapping=tex-text]{Helvetica Neue}
-\setmonofont{Menlo}
+\setmonofont[Scale=MatchLowercase]{Menlo}
 \setmathfont{Asana-Math.otf}
 \newfontfamily\zapfino{Zapfino}
 
@@ -55,10 +55,17 @@
 
 \newcommand{\TITLE}{Hilfsunterlagen}
 \newcommand{\TITLEDESCRIPTION}{Algorithmen und Datenstrukturen}
-\newcommand{\REVISION}{4}
-\newcommand{\SUBJECT}{Diverse in Unterlagen zur LVA Algorithmen und Datenstrukturen}
+\newcommand{\REVISION}{5}
+\newcommand{\SUBJECT}{Diverse Unterlagen zur LVA Algorithmen und Datenstrukturen}
 \newcommand{\LOCATION}{Wien}
-\newcommand{\KEYWORDS}{Dynamische Programmierung, Algorithmen und Datenstrukturen 1, Matrix, Laufzeitbestimmung}
+\newcommand{\KEYWORDS}
+{
+	Algorithmen und Datenstrukturen 1,
+	Dynamische Programmierung,
+	Hashfunktionen,
+	Laufzeitbestimmung,
+	Matrix
+}
 \newcommand{\LEFTFOOTER}{Algodat-Hilfsunterlagen}
 
 \newcommand{\AUTHORONE}{-}
@@ -159,13 +166,13 @@ Der erste Schritt am Anfang der Analyse einer Funktion wie z.B.
 
 \begin{equation}
 	\label{function:Laufzeit}
-	f(n) = \left\{ 
+	f(n) = \left\{
 	\begin{array}{l l}
 		2⋅ n² + \frac{n²}{2} + 10 & \quad \text{wenn $n < 50$}\\
-		
+
 		0.5 ⋅ n^\frac{1}{2} & \quad \text{wenn $n$ ungerade und $n ≥ 50$}\\
-		
-		\frac{1}{2}⋅ n + \frac{n²}{n} ⋅ \log\left(n²\right) - \frac{1}{10} & 
+
+		\frac{1}{2}⋅ n + \frac{n²}{n} ⋅ \log\left(n²\right) - \frac{1}{10} &
 		\quad \text{sonst}
 	\end{array} \right.
 \end{equation}
@@ -188,11 +195,11 @@ Nach der Umformung der Funktion ohne den ersten Zweig, den wir ohnehin für den 
 		\caption{Vereinfachte Funktion für $n≥50$}
 		\label{figure:Vereinfachte_Funktion}
 \[
-	f(n) = \left\{ 
-	\begin{array}{l l}		
+	f(n) = \left\{
+	\begin{array}{l l}
 		0.5⋅ \sqrt n & \quad \text{wenn $n$ ungerade}\\
-		
-		\frac{1}{2}⋅ n + 2 n ⋅ \log\left(n\right) - \frac{1}{10} 
+
+		\frac{1}{2}⋅ n + 2 n ⋅ \log\left(n\right) - \frac{1}{10}
 		& \quad \text{sonst}
 	\end{array} \right.
 \]
@@ -200,22 +207,22 @@ Nach der Umformung der Funktion ohne den ersten Zweig, den wir ohnehin für den 
 
 \subsubsection{Vereinfachte Terme mit asymptotisch gleicher Laufzeit in Theta-Notation}
 
-Als nächsten Schritt könne wir jetzt Terme für die Zweige unserer Funktionen bestimmen die die „gleiche” Laufzeit wie die Terme unserer ursprünglichen Funktion besitzen. Das ist vor allem praktisch wenn wir \break angeben wollen wie die unteren und oberen Schranken unserer Funktion aussehen. Dazu bestimmen wir in jedem Zweig den „größten” und somit den für die Laufzeit bestimmenden Teil.\\
+Als nächsten Schritt könne wir jetzt Terme für die Zweige unserer Funktionen bestimmen die die „gleiche” Laufzeit wie die Terme unserer ursprünglichen Funktion besitzen. Das ist vor allem praktisch wenn wir angeben wollen wie die unteren und oberen Schranken unserer Funktion aussehen. Dazu bestimmen wir in jedem Zweig den „größten” und somit den für die Laufzeit bestimmenden Teil.\\
 
 In der zweiten Zweig unserer Funktion ist der bestimmende Teil der Term $\sqrt n$. Die Konstante können wir streichen da sie nichts am asymptotischen Wachstum der Funktion ändert.\\
 
 Im dritten Zweig könne wir erkennen, dass „$2 n ⋅ \log n$” den für das Wachstum wichtigen Teil darstellt. Die Konstante spielt keine Rolle für das Wachstum. Somit kommen wir hier auf den Term „$n \log n$” der asymptotisch gleiches Wachstum wie unsere Ausgangsterm aufweist. Die gesamte vereinfachte Funktion, die für ein $n≥ 50$ das gleiche Wachstum wie die Ausgangsfunktion aufweist ist in Abbildung \ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum} zu sehen.
 
 \begin{figure}[H]
-	\caption{Funktion mit asymptotisch gleichem Wachstum wie die 
+	\caption{Funktion mit asymptotisch gleichem Wachstum wie die
 	Ausgangsfunktion ab $n≥50$}
 	\label{Figure:Vereinfachte_Funktion_Gleiches_Wachstum}
 \[
 	\label{function:Laufzeit_Vereinfacht}
-	f(n) = \left\{ 
-	\begin{array}{l l}		
+	f(n) = \left\{
+	\begin{array}{l l}
 		\sqrt n & \quad \text{wenn $n$ ungerade}\\
-		
+
 		n \log n & \quad \text{sonst}
 	\end{array} \right.
 \]
@@ -228,7 +235,7 @@ Aus der vereinfachte Funktion können wir gleich erkennen, dass alle Funktionen 
 Wir wollen nun beweisen, dass $\sqrt n$ eine untere Schranke für unsere Funktion darstellt also $f\left(n\right) = Ω \left(\sqrt n\right)$ gilt. Dazu schreiben wir als erstes laut Definition an:
 \[
 	f\left(n\right)=Ω \left(\sqrt n\right) \Rightarrow
-	∃ c,n > 0 \quad ∀ n≥ n₀: 0 ≤ c ⋅ \sqrt n≤ 
+	∃ c,n > 0 \quad ∀ n≥ n₀: 0 ≤ c ⋅ \sqrt n≤
 	f\left(n\right)
 \]
 
@@ -248,7 +255,7 @@ Hier erkennt man direkt aus dem angeschriebenen Werten, dass diese Gleichung fü
 Wir dividieren durch $\sqrt n$ und kommen damit auf:
 
 \[
-	0 ≤ c ≤ 
+	0 ≤ c ≤
 	\frac{1}{2} \sqrt n + 2 \sqrt n ⋅ \log\left(n\right) - \frac{1}{10\sqrt n}
 \]
 
@@ -256,7 +263,7 @@ Der rechte Teil wächst somit mit steigendem $n$. Wir können also ein $c$ finde
 
 \subsubsection{Widerlegung}
 
-Wir wollen nun widerlegen, dass unsere Funktion ein Wachstum von \break $θ \left(n \log n\right)$ besitzt. Aus Abbildung \ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum} können wir erkennen, dass das Wachstum für einen der Zweige  $θ \left(n \log n\right)$ ist. Wir nehmen also den anderen Teil um die Behauptung zu widerlegen und schreiben laut Definition:
+Wir wollen nun widerlegen, dass unsere Funktion ein Wachstum von $θ \left(n \log n\right)$ besitzt. Aus Abbildung \ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum} können wir erkennen, dass das Wachstum für einen der Zweige  $θ \left(n \log n\right)$ ist. Wir nehmen also den anderen Teil um die Behauptung zu widerlegen und schreiben laut Definition:
 
 \[
 	∃ c₁,c₂, n > 0 \quad ∀ n ≥ n₀ ~ : ~
@@ -283,14 +290,14 @@ Somit hat die Funktion keine untere Schranke $n \log n$	 $\left(f(n \log n)≠ �
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
 			Annahme & \multicolumn{4}{|c|}{Folgerung: $f\left(n\right)$ ist}\\
-			
-			& $Ω\left(g\left(n\right)\right)$ & 
+
+			& $Ω\left(g\left(n\right)\right)$ &
 			$O\left(g\left(n\right)\right)$ &
-			$Ω\left(h\left(n\right)\right)$ & 
+			$Ω\left(h\left(n\right)\right)$ &
 			$O\left(h\left(n\right)\right)$\\
 			\cline{2-5}
-			
-			$f\left(n\right) = O\left(g\left(n\right) + f\left(n\right)\right) 
+
+			$f\left(n\right) = O\left(g\left(n\right) + f\left(n\right)\right)
 			∧ g\left(n\right) = Ω\left(h\left(n\right)\right)$ &&&&\\
 			\hline
 		\end{tabular}}
@@ -298,14 +305,14 @@ Somit hat die Funktion keine untere Schranke $n \log n$	 $\left(f(n \log n)≠ �
 \end{table}
 
 In Tabelle~\ref{table:Test_2010-11-26_1Ab} darf kein Feld angekreuzt werden, da $g\left(n\right)$ sowohl eine untere als auch eine obere Schranke von  $f\left(n\right)$ sein kann.
-		
+
 \subsection{Erfassung von Algorithmen-Laufzeiten}
 
 \subsubsection{Allgemeine Hinweise}
 
 \paragraph{Verschachtelte Schleifen}~\\
 
-Bei verschachtelten Schleifen werden die Laufzeiten multipliziert sofern diese unabhängig sind. Das heißt es werden in der inneren Schleife keine Werte verändert die die Laufvariable der äußeren Schleife ändern und \break umgekehrt. Folgender Code zeigt zwei unabhängige Schleifen:
+Bei verschachtelten Schleifen werden die Laufzeiten multipliziert sofern diese unabhängig sind. Das heißt es werden in der inneren Schleife keine Werte verändert die die Laufvariable der äußeren Schleife ändern und umgekehrt. Folgender Code zeigt zwei unabhängige Schleifen:
 
 \begin{verbatimtab}
 j = n
@@ -324,7 +331,7 @@ Zwei voneinander abhängige Schleifen werden z.B. in Abschnitt \ref{section:Test
 
 \paragraph{Zurücksetzten von Variablen}~\\
 
-Der folgende Code zeigt zwei verschachtelte Schleifen. 
+Der folgende Code zeigt zwei verschachtelte Schleifen.
 
 \begin{verbatimtab}
 i = n
@@ -361,7 +368,7 @@ Bei vielen Aufgaben stellt sich die Frage wie oft denn z.B. ein bestimmter Term 
 	\item eine Konstante wird abgezogen/addiert z.B. $a=a-1, a=a+1$
 	\item Multiplikation mit Konstante oder Division durch eine Konstante
 	\item ein Term abhängig von n wird abgezogen/addiert z.B.\
-	$a=a+\sqrt n, a=a-log\left(n\right)$ 
+	$a=a+\sqrt n, a=a-log\left(n\right)$
 \end{itemize}
 
 Ein Beispiel für den erste Punkt wäre:
@@ -467,7 +474,7 @@ Die äußerste „für”-Schleife wird n mal durchgeführt. Da die innere „so
 
 Zusammengezählt kommen wir damit auf eine Laufzeit in Theta-Notation von \[θ\left(\log(n)+\left(n-1\right)⋅ 1\right) \equiv θ\left(n\right)\]
 
-Der Wert von b nach den ersten beiden Schleifen beträgt $2^{\log(n)}$. Dieser Wert ergibt sich dadurch, dass in der inneren Schleife b $\log(n)$ mal verdoppelt wurde. Dabei gehen wir hierbei davon aus, das es sich bei $\log(n)$ um den Zweierlogarithmus handelt. Dadurch heben sich der Logarithmus und die Zweierpotenz (Umkehrfunktion des Zweier-Logarithmus) auf und der Wert von $b$ beträgt somit $n$.\\
+Der Wert von b nach den ersten beiden Schleifen beträgt $2^{\log(n)}$. Dieser Wert ergibt sich dadurch, dass in der inneren Schleife b $\log(n)$ mal verdoppelt wurde. Dabei gehen wir hierbei davon aus, das es sich bei $\log(n)$ um den Zweierlogarithmus handelt. Dadurch heben sich der Logarithmus und die Zweierpotenz (Umkehrfunktion des Zweierlogarithmus) auf und der Wert von $b$ beträgt somit $n$.\\
 
 Der neue Wert der in a gespeichert wird ist also $n²$ ($a=b^2$). Damit kommen wir für die letzte „für”-Schleife auf eine Laufzeit in Theta-Notation von $θ(n²)$. Die Gesamtlaufzeit beträgt somit: $$θ\left(n+n²\right) \equiv θ\left(n²\right)$$
 
@@ -507,59 +514,59 @@ Die Angabe zum Beispiel ist in Abbildung~\ref{figure:Test_2010-01-14_1Ba} zu seh
 
 \paragraph{Lösung}
 
-\[ 
-	h\left(k, i\right) = 
+\[
+	h\left(k, i\right) =
 	\left( h₁\left(k\right) + i ⋅ h₂\left(k\right) \right) \bmod{m}
 \]
-\[ 
-	h\left(k, i \right) = 
+\[
+	h\left(k, i \right) =
 	\left( \left( k \bmod{5} + 1 \right) + i ⋅ k \bmod{7} \right) \bmod{7}
 \]
-\[ 
-	h\left(15, 0 \right) = 
+\[
+	h\left(15, 0 \right) =
 	\left( 15 \bmod{5} +1 \right) \bmod{7} = 1
 \]
-\[ 
-	h\left(15, 1 \right) = 
+\[
+	h\left(15, 1 \right) =
 	\left( 1 + 15 \bmod{7} \right) \bmod{7} = 2
 \]
-\[ 
-	h\left(10, x \right) = 
+\[
+	h\left(10, x \right) =
 	\left( 1 + 10 \bmod{7} \right) \bmod{7} = 4
 \]
-\[ 
-	h\left(15, 2 \right) = 
+\[
+	h\left(15, 2 \right) =
 	\left( 2 + 15 \bmod{7} \right) \bmod{7} = 3
 \]
-\[ 
-	h\left(1, x \right) = 
+\[
+	h\left(1, x \right) =
 	\left( 2 + 1 \bmod{7} \right) \bmod{7} = 3
 \]
-\[ 
-	h\left(15, 3 \right) = 
+\[
+	h\left(15, 3 \right) =
 	\left( 3 + 15 \bmod{7} \right) \bmod{7} = 4
 \]
-\[ 
-	h\left(12, x \right) = 
+\[
+	h\left(12, x \right) =
 	\left( 3 + 12 \bmod{7} \right) \bmod{7} = 1
 \]
-\[ 
-	h\left(15, 3 \right) = 
+\[
+	h\left(15, 4 \right) =
 	\left( 4 + 15 \bmod{7} \right) \bmod{7} = 5
 \]
 
-12 wird an die Stelle 5 gegeben.
+15 wird an die Stelle 5 gegeben.
 
-\[ 
-	h\left(8, 0 \right) = 
+\[
+	h\left(8, 0 \right) =
 	\left( 8 \bmod{5} +1 \right) \bmod{7} = 4
 \]
-\[ 
-	h\left(8, 1 \right) = 
+\[
+	h\left(8, 1 \right) =
 	\left( 4 + 8 \bmod{7} \right) \bmod{7} = 5
 \]
-\[ 
-	h\left(10, x \right) = 
+\[
+	h\left(10, x \right) =
 	\left( 4 + 10 \bmod{7} \right) \bmod{7} = 0
 \]
 
@@ -581,7 +588,7 @@ Die Hashfunktionen sind keine gute Wahl, da bei $h₂\left(k\right)$ eine Schrit
 
 \paragraph{a)}
 
-Wir wenden schrittweise den in Abbildung~\ref{figure:Test_2011-01-14_3A}  dargestellten Algorithmus auf den Graphen der ebenfalls in Abbildung~\ref{figure:Test_2011-01-14_3A} zu sehen ist an und geben jeweils den Zustand des Graphen und des „previous”-Arrays nach einem Durchlauf der Funktion $FUNKTION1(v_4)$ an.
+Wir wenden schrittweise den in Abbildung~\ref{figure:Test_2011-01-14_3A}  dargestellten Algorithmus auf den Graphen der ebenfalls in Abbildung~\ref{figure:Test_2011-01-14_3A} zu sehen ist an und geben jeweils den Zustand des Graphen und des „previous”-Arrays nach einem Durchlauf von $FUNKTION1(v_4)$ an.
 
 \subparagraph{1. Schritt}
 
@@ -667,7 +674,7 @@ Nach dem 4. Schritt erhalten wir sowohl das gleiche „previous”-Array als auc
 \begin{itemize}
 	\item Die Worst-Case Laufzeit beträgt bei einem vollständigen Graphen $θ\left(|V³|\right)$, da der Graph $θ\left(|V|²\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
 	\item Die \textbf{Worst}-Case Laufzeit beträgt bei einem dünnen Graphen $θ\left(|V²|\right)$, da der Graph $θ\left(|V|\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
-	\item Bei dem Algorithmus handelt es sich um ein iteratives Programm. 
+	\item Bei dem Algorithmus handelt es sich um ein iteratives Programm.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -709,7 +716,7 @@ Als erstes erstellen wir eine Tabelle mit den nötigen Einträgen. Da wir die Wa
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 & 
+			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			&	&	&	&	&	&	&	&\\
@@ -728,13 +735,13 @@ Wie wir sehen stehen die Spalten für die Kosten (Gewicht) des Eis und die Zeile
 
 \begin{leftbar}
 	\textbf{Anmerkung:}\\
-	
+
 	Üblicherweise werden in der LVA „Algorithmen und Datenstrukturen 1”, Koffer oder Rucksäcke so gepackt, dass ein bestimmtes Gewicht nicht überschritten wird und sich gleichzeitig ein möglichst hoher Spaßfaktor ergibt.\\
 
 	In diesem Zusammenhang wird der Wert der maximiert werden soll auch manchmal als Kosten oder „c” bezeichnet. In diesem Musterbeispiel stellen die Kosten des Eises allerdings das eigentliche Gewicht „w”, also die Randbedingung die nicht überschritten werden soll dar. Dahingegen wird die Variable die maximiert werden soll hier als Genussfaktor bezeichnet, sie stellt also laut LVA-Regelung das eigentliche „c” dar.\\
 
 	Ich hoffe mal diese Erläuterung verwirrt nicht mehr als sie hilft.\\
-	
+
 	\textbf{Kurzfassung:}\\
 	w\dots Kosten des Eises\\
 	c\dots Genussfaktor
@@ -808,7 +815,7 @@ Die Geschmackssorte Vanille besitzt einen Genussfaktor von 7 bei Kosten von 2 Eu
 
 Jetzt betrachten wir wieder die Zeile davor um zu sehen welche weiteren Kombinationen möglich sind. Wenn wir Vanille-Eis und den ersten Wert in der oberen Zeile wählen kommen wir auf Kosten von 3 und einen Genussfaktor von 10. Dieser Wert entspricht dem von der vorhergehenden Zeile. Wir haben also eine Kombination gefunden die gleich gut wie die vorhergehende war. Im Endeffekt bleibt der Wert in der Spalte 3 also der Selbe.\\
 
-In Spalte 3 der vorhergehenden Zeile befindet sich der Genussfaktor 10. Zusammen mit der aktuellen Sorte ergibt sich ein Genussfaktor von 17 bei Kosten von 5 Euro. Da sich in der Spalte 5 noch kein Wert befindet tragen wir diesen Genussfaktor also dort ein.\\ 
+In Spalte 3 der vorhergehenden Zeile befindet sich der Genussfaktor 10. Zusammen mit der aktuellen Sorte ergibt sich ein Genussfaktor von 17 bei Kosten von 5 Euro. Da sich in der Spalte 5 noch kein Wert befindet tragen wir diesen Genussfaktor also dort ein.\\
 
 Zum Schluss betrachten wir noch den Genussfaktor von 13 bei Kosten von 4. Zusammen mit der aktuellen Eissorte ergibt sich ein Genussfaktor von 20 bei Kosten von 6. Wir tragen also diesen Wert ein. Die anderen Werte werden von oben übernommen, da wir noch keine besseren Kombinationen für die Kosten von 1 und 4 gefunden haben (Tabelle \ref{table:3_Eis}).
 
@@ -844,7 +851,7 @@ Der nächste Genussfaktor aus der vorhergehenden Zeile ist 10. Gemeinsam mit der
 
 Genussfaktor 17 kombiniert mit dem Genussfaktor von Málaga-Eis ergibt den Wert von 25 der auf Grund der Kosten von 7 Euro in die korrespondierende Spalte geschrieben wird.\\
 
-Da der letzte Wert aus der vorhergehenden Zeile schon Kosten von 6 besitzt und diese zusammen mit den Kosten des aktuellen Eises über die festgesetzten Maximalkosten von 7 Euro hinausgeht brauchen wir diesen nicht mehr zu betrachten und kommen schließlich auf Tabelle \ref{table:4_Eis}. 
+Da der letzte Wert aus der vorhergehenden Zeile schon Kosten von 6 besitzt und diese zusammen mit den Kosten des aktuellen Eises über die festgesetzten Maximalkosten von 7 Euro hinausgeht brauchen wir diesen nicht mehr zu betrachten und kommen schließlich auf Tabelle \ref{table:4_Eis}.
 
 \begin{table}[H]
 	\begin{center}
@@ -872,17 +879,17 @@ Nach der gleichen Vorgehensweise wie in den Schritten zuvor kommen wir, nachdem 
 			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
-			Keine Sorte			& {\color{orange}0} & 0 & 0 & 0	 &	0 &	 0 & 0 & 
+			Keine Sorte			& {\color{orange}0} & 0 & 0 & 0	 &	0 &	 0 & 0 &
 			0	 \\
-			\textbf{Creme de la Creme}	& 0 &	&	& {\color{orange}10} &	  &	   
+			\textbf{Creme de la Creme}	& 0 &	&	& {\color{orange}10} &	  &
 			&	&	 \\
-			Brokkoli			& 0 & 3 &	& {\color{orange}10} & 13 &	   &	
+			Brokkoli			& 0 & 3 &	& {\color{orange}10} & 13 &	   &
 			&	 \\
-			\textbf{Vanille}				& 0 & 3 & 7 & 10 & 13 & 
+			\textbf{Vanille}				& 0 & 3 & 7 & 10 & 13 &
 			{\color{orange}17} & 20 &	 \\
-			\textbf{Málaga}				& 0 & 3 & 8 & 11 & 15 & 18 & 21 & 
+			\textbf{Málaga}				& 0 & 3 & 8 & 11 & 15 & 18 & 21 &
 			{\color{orange}25} \\
-			Schokolade			& 0 & 3 & 8 & 11 & 15 & 18 & 21 & 
+			Schokolade			& 0 & 3 & 8 & 11 & 15 & 18 & 21 &
 			{\color{orange}\emph{25}} \\
 		\end{tabular}
 	\end{center}
@@ -918,7 +925,7 @@ Eine Plausibilitätsüberprüfung der gesamten Werte ist in Gleichung \ref{equat
 
 \subsection{Vollständiges Ausfüllen der Tabelle}
 
-Tabelle \ref{table:5_Eis} stellt alle möglichen Lösungen eigentlich schon dar und sollte auch beim Test durchaus als richtig gewertet werden. Um eine meiner Meinung nach nur verwirrendere „vollständige” Darstellung nach der gegebenen Formel zu erhalten muss man die vorhergehende Tabelle noch leicht verändern.\\ 
+Tabelle \ref{table:5_Eis} stellt alle möglichen Lösungen eigentlich schon dar und sollte auch beim Test durchaus als richtig gewertet werden. Um eine meiner Meinung nach nur verwirrendere „vollständige” Darstellung nach der gegebenen Formel zu erhalten muss man die vorhergehende Tabelle noch leicht verändern.\\
 
 So sind die fehlenden Werte jeweils durch den größtmöglichen Wert den sich durch die vorhergehende Zeile oder Spalte ergeben zu ersetzen. Auch schon ausgefüllte Werte müssen durch eventuell auftretende größere Werte, die sich in vorhergehenden Zeilen oder Spalten ergeben haben können, ersetzt werden.\\
 
