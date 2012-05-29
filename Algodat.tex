@@ -55,7 +55,7 @@
 
 \newcommand{\TITLE}{Hilfsunterlagen}
 \newcommand{\TITLEDESCRIPTION}{Algorithmen und Datenstrukturen}
-\newcommand{\REVISION}{5}
+\newcommand{\REVISION}{6}
 \newcommand{\SUBJECT}{Diverse Unterlagen zur LVA Algorithmen und Datenstrukturen}
 \newcommand{\LOCATION}{Wien}
 \newcommand{\KEYWORDS}
@@ -393,10 +393,10 @@ Die wiederholte Multiplikation mit einem Wert bedeutet üblicherweise, dass sich
 
 \subsubsection{Beispiele}
 
-\subsubsection{Test vom 16.11.2007}
+\paragraph{Test vom 16.11.2007}~\\
 \label{section:Test_2007-11-16}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 1.c) der Gruppe A}
 	\vskip 0.2cm
 	\centering
@@ -404,11 +404,11 @@ Die wiederholte Multiplikation mit einem Wert bedeutet üblicherweise, dass sich
 	\label{figure:Test_2007-11-16_1Ac}
 \end{figure}
 
-Die innerste solange-Schleife wird auf Grund dessen, dass die Variable $l$ nicht mehr rückgesetzt wird nur ein einziges mal im allerersten Durchlauf der beiden äußeren Schleifen durchgeführt. Damit kann man die Laufzeit der inneren Schleife vernachlässigen, da sie für alle anderen Durchläufe einen konstanten zeitlichen Aufwand besitzt.\\
+Die innerste solange-Schleife des in Abbildung~\ref{figure:Test_2007-11-16_1Ac} zu sehenden Codestücks wird auf Grund dessen, dass die Variable $l$ nicht mehr rückgesetzt wird nur ein einziges mal, im allerersten Durchlauf der beiden äußeren Schleifen durchgeführt. Damit kann man die Laufzeit der inneren Schleife vernachlässigen, da sie für alle anderen Durchläufe einen konstanten zeitlichen Aufwand besitzt.\\
 
 Die äußerste Schleife läuft von 1 bis $3n²$ und besitzt somit ein quadratischen Laufzeit. Die zweite für-Schleif läuft jeweils bis zu $\frac{j}{2}$. Das heißt die Laufzeit beträgt $\frac{1}{2},\frac{2}{2},\frac{3}{2},\frac{4}{2}\dots\frac{3n²}{2}$. Lassen wir die Konstante weg ($3n² \Rightarrow n²$) und ziehen den Term $\frac{1}{2}$ nach vorne erhalten wir $\frac{1}{2}\left(1,2,3,4\dots n²\right)$. Mit der Summenformel von Gauß ergibt sich also $\frac{1}{2}⋅(n²+1)⋅\frac{n²}{2}$ und somit insgesamt eine Laufzeit von $θ\left(n⁴\right)$ für das gesamte Codestück.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 1.c) der Gruppe B}
 	\vskip 0.2cm
 	\centering
@@ -416,11 +416,11 @@ Die äußerste Schleife läuft von 1 bis $3n²$ und besitzt somit ein quadratisc
 	\label{figure:Test_2007-11-16_1Bc}
 \end{figure}
 
-Die Analyse des Beispiels von Code \ref{figure:Test_2007-11-16_1Bc} führt analog zu dem vorhergehenden Beispiel auf eine Laufzeit von $θ\left(n⁶\right)$.
+Die Analyse des Codes von Abbildung~\ref{figure:Test_2007-11-16_1Bc} führt analog zu dem vorhergehenden Beispiel auf eine Laufzeit von $θ\left(n⁶\right)$.
 
 \paragraph{Test vom 25.4.2008}~\\
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 1.c) der Gruppe A}
 	\vskip 0.2cm
 	\centering
@@ -428,9 +428,9 @@ Die Analyse des Beispiels von Code \ref{figure:Test_2007-11-16_1Bc} führt analo
 	\label{figure:Test_2008-04-25_1Ac}
 \end{figure}
 
-Die beiden inneren Schleifen sind abhängig voneinander, da in der äußeren Schleife $j$ auf ein Drittel verringert wird. Die innere Schleife läuft also $n,\frac{n}{3},\frac{n}{9},\frac{n}{27}\dots$ solange $j≥1$. Die Summe über diese Terme liegt zwischen n und $2n$. Die inneren Schleifen ergeben also einen Aufwand von $θ\left(n\right)$. Die äußere Schleife läuft $n²$ mal. Somit ergibt sich ein Gesamt-Aufwand von $θ\left(n³\right)$.
+Wir analysieren den in Abbildung~\ref{figure:Test_2008-04-25_1Ac} dargestellten Code. Die beiden inneren Schleifen sind abhängig voneinander, da in der äußeren Schleife $j$ auf ein Drittel verringert wird. Die innere Schleife läuft also $n,\frac{n}{3},\frac{n}{9},\frac{n}{27}\dots$ solange $j≥1$. Die Summe über diese Terme liegt zwischen n und $2n$. Die inneren Schleifen ergeben also einen Aufwand von $θ\left(n\right)$. Die äußere Schleife läuft $n²$ mal. Somit ergibt sich ein Gesamt-Aufwand von $θ\left(n³\right)$.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 1.c) der Gruppe B}
 	\vskip 0.2cm
 	\centering
@@ -438,31 +438,31 @@ Die beiden inneren Schleifen sind abhängig voneinander, da in der äußeren Sch
 	\label{figure:Test_2008-04-25_1Bc}
 \end{figure}
 
-Nach analoger Analyse zum vorhergehenden Beispiel ergibt sich hier eine Laufzeit von $θ\left(n²\right)$.
+Nach analoger Analyse zum vorhergehenden Beispiel ergibt sich für den Code von Abbildung~\ref{figure:Test_2008-04-25_1Bc} eine Laufzeit von $θ\left(n²\right)$.
 
 \paragraph{Test vom 7.11.2008}~\\
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 1.c) A der Gruppe A}
 	\vskip 0.2cm
 	\centering
-	\includegraphics{Figures/Test_2008-11-07_1AcA}
+	\includegraphics[width=0.32\textwidth]{Figures/Test_2008-11-07_1AcA}
 	\label{figure:Test_2008-11-07_1AcA}
 \end{figure}
 
-In der äußeren Schleife wird von $a$ immer wieder $n$ abgezogen. Das können wir $n$ mal machen bis $a≤0$ ist. Die äußere Schleife hat somit eine Laufzeit in $θ\left(n\right)$. In der inneren Schleife wird von der Variable $j$, die am Anfang den Wert $log\left(n\right)$ besitzt solange 1 abgezogen bis wir auf einen Wert von 1 kommen. Dieser Schritt kann $log\left(n\right)$ mal durchgeführt werden. Insgesamt ergibt sich also eine Laufzeit von $θ\left(log\left(n\right)⋅ n\right)$
+Der zu analysierende Code ist in Abbildung~\ref{figure:Test_2008-11-07_1AcA} dargestellt. In der äußeren Schleife wird von $a$ immer wieder $n$ abgezogen. Das können wir $n$ mal machen bis $a≤0$ ist. Die äußere Schleife hat somit eine Laufzeit in $θ\left(n\right)$. In der inneren Schleife wird von der Variable $j$, die am Anfang den Wert $log\left(n\right)$ besitzt solange 1 abgezogen bis wir auf einen Wert von 1 kommen. Dieser Schritt kann $log\left(n\right)$ mal durchgeführt werden. Insgesamt ergibt sich also eine Laufzeit von $θ\left(log\left(n\right)⋅ n\right)$
 
 \paragraph{Test vom 15.04.2011}~\\
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 1.a) B der Gruppe A}
 	\vskip 0.2cm
 	\centering
-	\includegraphics{Figures/Test_2008-11-07_1AaB}
-	\label{figure:Test_2008-11-07_1AaB}
+	\includegraphics{Figures/Test_2011_04_15_AaB}
+	\label{figure:Test_2011_04_15_AaB}
 \end{figure}
 
-Die äußerste „für”-Schleife wird n mal durchgeführt. Da die innere „so-lange”-Schleife nur beim ersten dieser n Durchgänge ausgeführt wird — a wird nachdem es den Wert n erreicht hat nicht mehr auf einen kleineren Wert gesetzt — kann die Laufzeit der inneren Schleife von $\log(n)$ vernachlässigt werden. Insgesamt ergibt sich für die erste „für”-Schleife also eine Laufzeit von $θ(n)$. Diese Tatsache kann man auch erkennen wenn man sich die einzelnen Laufzeiten der äußersten Schleife ansieht:
+Der in Abbildung~\ref{figure:Test_2011_04_15_AaB} gezeigte Code soll analysiert werden. Die äußerste „für”-Schleife wird n mal durchgeführt. Da die innere „so-lange”-Schleife nur beim ersten dieser n Durchgänge ausgeführt wird — a wird nachdem es den Wert n erreicht hat nicht mehr auf einen kleineren Wert gesetzt — kann die Laufzeit der inneren Schleife von $\log(n)$ vernachlässigt werden. Insgesamt ergibt sich für die erste „für”-Schleife also eine Laufzeit von $θ(n)$. Diese Tatsache kann man auch erkennen wenn man sich die einzelnen Laufzeiten der äußersten Schleife ansieht:
 
 \begin{itemize}
 	\item 1. Durchgang: $θ\left(\log(\left(n\right)) \right)$
@@ -482,7 +482,7 @@ Der neue Wert der in a gespeichert wird ist also $n²$ ($a=b^2$). Damit kommen w
 
 \subsection{Test vom 25.4.2008}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\caption{Beispiel 2.c) von Gruppe A}
 	\vskip 0.2cm
 	\centering
@@ -490,7 +490,7 @@ Der neue Wert der in a gespeichert wird ist also $n²$ ($a=b^2$). Damit kommen w
 	\label{figure:Test_2008-04-25_2Ab}
 \end{figure}
 
-Der obige Sortieralgorithmus wird auf ein Feld $A=\left(A[1],\dots,A[n]\right)$ an-gewendet. Er sortiert nicht alle Eingabefolgen korrekt. Wo liegt das Problem und wie kann man es beheben?\\
+Der in Abbildung~\ref{figure:Test_2008-04-25_2Ab} gezeigte Sortieralgorithmus wird auf ein Feld $A=\left(A[1],\dots,A[n]\right)$ angewendet. Er sortiert nicht alle Eingabefolgen korrekt. Wo liegt das Problem und wie kann man es beheben?\\
 
 Es ist möglich, dass der Algorithmus nicht terminiert. Eine Folge die z.B. zu einer Endlosschleife führt ist [1,1]. Hier werden als erstes die beiden Elemente vertauscht da $1≥1$ ist und dann die Variable \texttt{vertauscht} auf wahr gesetzt. Somit wird die wiederhole-Schleife wieder ausgeführt. In dieser werden wieder die beiden Elemente vertauscht und \texttt{vertauscht} auf wahr gesetzt\dots\\
 
@@ -514,61 +514,66 @@ Die Angabe zum Beispiel ist in Abbildung~\ref{figure:Test_2010-01-14_1Ba} zu seh
 
 \paragraph{Lösung}
 
-\[
-	h\left(k, i\right) =
-	\left( h₁\left(k\right) + i ⋅ h₂\left(k\right) \right) \bmod{m}
-\]
-\[
-	h\left(k, i \right) =
-	\left( \left( k \bmod{5} + 1 \right) + i ⋅ k \bmod{7} \right) \bmod{7}
-\]
-\[
-	h\left(15, 0 \right) =
-	\left( 15 \bmod{5} +1 \right) \bmod{7} = 1
-\]
-\[
-	h\left(15, 1 \right) =
-	\left( 1 + 15 \bmod{7} \right) \bmod{7} = 2
-\]
-\[
-	h\left(10, x \right) =
-	\left( 1 + 10 \bmod{7} \right) \bmod{7} = 4
-\]
-\[
-	h\left(15, 2 \right) =
-	\left( 2 + 15 \bmod{7} \right) \bmod{7} = 3
-\]
-\[
-	h\left(1, x \right) =
-	\left( 2 + 1 \bmod{7} \right) \bmod{7} = 3
-\]
-\[
-	h\left(15, 3 \right) =
-	\left( 3 + 15 \bmod{7} \right) \bmod{7} = 4
-\]
-\[
-	h\left(12, x \right) =
-	\left( 3 + 12 \bmod{7} \right) \bmod{7} = 1
-\]
-\[
-	h\left(15, 4 \right) =
-	\left( 4 + 15 \bmod{7} \right) \bmod{7} = 5
-\]
+\begin{align*}
+	h\left(k, i\right) &
+		= \left( h₁\left(k\right) + i ⋅ h₂\left(k\right) \right) \bmod{m}
+	\\
+	h\left(k, i \right) &
+		= \left(
+			\left( k \bmod{5} + 1 \right) + i ⋅ \left(k \bmod{7} \right)
+		\right) \bmod{7}
+\end{align*}
+\begin{align*}
+	h\left(15, 0 \right) &
+		= \left( 15 \bmod{5} +1 \right) \bmod{7} = \textcolor{orange}{1}
+\end{align*}
+\begin{align*}
+	h\left(15, 1 \right) &
+		= \left( \textcolor{orange}{1} + 15 \bmod{7} \right) \bmod{7}
+		= \textcolor{aqua}{2}
+	\\
+	h\left(10, x \right) &
+		= \left( \textcolor{orange}{1} + 10 \bmod{7} \right) \bmod{7}
+		= 4
+\end{align*}
+\begin{align*}
+	h\left(15, 2 \right) &
+		= \left( \textcolor{aqua}{2} + 15 \bmod{7} \right) \bmod{7}
+		= \textcolor{violet}{3}
+	\\
+	h\left(1, x \right) &
+		= \left( \textcolor{aqua}{2} + 1 \bmod{7} \right) \bmod{7}
+		= 3
+\end{align*}
+\begin{align*}
+	h\left(15, 3 \right) &
+		= \left( \textcolor{violet}{3} + 15 \bmod{7} \right) \bmod{7}
+		= \textcolor{turquoise}{4}
+	\\
+	h\left(12, x \right) &
+		= \left( \textcolor{violet}{3} + 12 \bmod{7} \right) \bmod{7}
+		= 1
+\end{align*}
+\begin{align*}
+	h\left(15, 4 \right) &
+		= \left( \textcolor{turquoise}{4} + 15 \bmod{7} \right) \bmod{7}
+		= 5
+\end{align*}
 
 15 wird an die Stelle 5 gegeben.
-
-\[
-	h\left(8, 0 \right) =
-	\left( 8 \bmod{5} +1 \right) \bmod{7} = 4
-\]
-\[
-	h\left(8, 1 \right) =
-	\left( 4 + 8 \bmod{7} \right) \bmod{7} = 5
-\]
-\[
-	h\left(10, x \right) =
-	\left( 4 + 10 \bmod{7} \right) \bmod{7} = 0
-\]
+\begin{align*}
+	h\left(8, 0 \right) &
+		= \left( 8 \bmod{5} + 1 \right) \bmod{7}
+		= \textcolor{orange}{4}
+	\\
+	h\left(8, 1 \right) &
+		= \left( \textcolor{orange}{4} + 8 \bmod{7} \right) \bmod{7}
+		= 5
+	\\
+	h\left(10, x \right) &
+		= \left( \textcolor{orange}{4} + 10 \bmod{7} \right) \bmod{7}
+		= 0
+\end{align*}
 
 10 wird an Stelle 0 gegeben während 8 an die ursprüngliche Stelle von 10 wandert, also an Stelle 4 eingesetzt wird.\\
 
@@ -594,21 +599,43 @@ Wir wenden schrittweise den in Abbildung~\ref{figure:Test_2011-01-14_3A}  darges
 
 \begin{center}
 	\begin{tabular}{lccccc}
-					& v1	& v2	& v3 & v4	& v5\\
+					& v1	& v2	& v3	& v4	& v5\\
 		\hline
-		previous[v] & Null	& Null	& Null	& Null	& Null \\
+		previous[v] & NULL	& NULL	& NULL	& NULL	&  NULL
 	\end{tabular}
 \end{center}
 
-Wir setzen als erstes alle Vorgänger auf den Wert „Null”. Dann beginnen wir mit der Ausführung von $FUNKTION1(v4)$ die als erstes den Vorgänger von $v4$ auf sich selbst setzt und dann $v4$ in den Stack gibt. Danach wird $v4$ aus dem Stack entnommen und all Nachbarknoten von $v4$ der Reihenfolge nach betrachtet.\\
+Wir setzen als erstes alle Vorgänger auf den Wert „NULL”. Dann beginnen wir mit der Ausführung von $FUNKTION1(v4)$ die als erstes den Vorgänger von $v4$ auf sich selbst setzt und dann $v4$ in den Stack gibt. Danach wird $v4$ aus dem Stack entnommen und all Nachbarknoten von $v4$ der Reihenfolge nach betrachtet.\\
 
-Der Vorgänger vom ersten Nachbarn $v1$ und zweiten Nachbarn $v3$ wird somit auf $v4$ gesetzt und in dieser Reihenfolge in den Stack gegeben. Danach wird $v3$ aus dem Stack entnommen und seine Nachbarn betrachtet. Da der Vorgänger von $v1$ schon vorher auf $v4$ gesetzt wurde und somit nicht $v3$ entspricht wird die Kante $(v1,v3)$ aus dem Graphen entfernt und die Funktion retourniert mit dem Wert true. Damit ergibt sich nach dem ersten Aufruf von $FUNKTION1(v4)$ folgender Zustand von previous:
+Der Vorgänger vom ersten Nachbar $v1$ und vom zweiten Nachbar $v3$ werden auf $v4$ gesetzt. Weiters werden $v1$ und $v3$ der Reihe nach in den Stack $S$ gegeben.\\
+
+\begin{minipage}[b]{0.7\linewidth}
+	\begin{center}
+		\begin{tabular}{lccccc}
+						& v1	& v2	& v3	& v4	& v5\\
+			\hline
+			previous[v] & v4	& NULL	& v4	& NULL	&  NULL
+		\end{tabular}
+	\end{center}
+\end{minipage}
+\begin{minipage}[b]{0.15\linewidth}
+	\flushright S:~
+\end{minipage}
+\begin{minipage}[b]{0.15\linewidth}
+	\begin{tabular}{|c|}
+		$v3$\\
+		$v1$\\
+		\hline
+	\end{tabular}
+\end{minipage}\\
+
+Danach wird $v3$ (=$k$) aus dem Stack entnommen und seine Nachbarn betrachtet. Da der Vorgänger von $v3$ schon vorher auf $v4$ (=$previous[k]$) gesetzt wurde und somit nicht $v1$ (=$w$) entspricht wird die Kante $(v3,v1)$ aus dem Graphen entfernt und die Funktion retourniert den Wert „true”. Damit ergibt sich nach dem ersten Aufruf von $FUNKTION1(v4)$ folgender Zustand von „previous”:
 
 \begin{center}
 	\begin{tabular}{lccccc}
 					& v1	& v2	& v3 & v4	& v5\\
 		\hline
-		previous[v] & v4	& Null	& v4 & v4	& Null\\
+		previous[v] & v4	& NULL	& v4 & v4	& NULL\\
 	\end{tabular}
 \end{center}
 
@@ -634,7 +661,7 @@ Nach einer weiteren Anwendung von $FUNKTION1(v4)$ kommen wir auf folgenden Zusta
 	\end{tabular}
 \end{center}
 
-Da es sich beim Vorgänger von $v2$ nicht um $v5$ handelt wird die Kante $(v2,v5)$ gelöscht und es ergibt sich der in Abbildung~\ref{figure:Test_2011-01-14-3A_Step2} dargestellte Graph.
+Da es sich beim Vorgänger von $v5$ nicht um $v2$ handelt wird die Kante $(v5,v2)$ gelöscht und es ergibt sich der in Abbildung~\ref{figure:Test_2011-01-14-3A_Step2} dargestellte Graph.
 
 \begin{figure}[htbp]
 	\caption{Graph nach der zweiten Anwendung von $FUNKTION1(v4)$}
@@ -656,26 +683,7 @@ Nach dem dritten Schritt ergibt sich folgendes „previous”-Array:
 	\end{tabular}
 \end{center}
 
-Nachdem der Vorgänger von $v1$ nicht $v2$ ist wird die Kante $(v1,v2)$ gelöscht und es ergibt sich der Graph von Abbildung~\ref{figure:Test_2011-01-14-3A_Step3}.
-
-\subparagraph{4. Schritt}~\\
-
-Nach dem 4. Schritt erhalten wir sowohl das gleiche „previous”-Array als auch den gleichen Graphen wie im vorigen Schritt. Diesmal wird von der Funktion allerdings false zurückgegeben und der Algorithmus terminiert. Bei $G₂$ handelt es sich also um den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step3} dargestellten Graphen.
-
-\paragraph{b)}
-
-\begin{itemize}
-	\item Der Algorithmus beruht auf dem Tiefensuche-Prinzip (Aus dem Stack wird immer der Knoten der als letztes reingegeben wurde als erstes wieder entnommen und betrachtet).
-	\item „WasBinIch” entfernt die Kreise eines Graphen und bildet somit (bei einem zusammenhängenden Graphen) einen (Spann)-Baum.
-\end{itemize}
-
-\paragraph{c)}
-
-\begin{itemize}
-	\item Die Worst-Case Laufzeit beträgt bei einem vollständigen Graphen $θ\left(|V³|\right)$, da der Graph $θ\left(|V|²\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
-	\item Die \textbf{Worst}-Case Laufzeit beträgt bei einem dünnen Graphen $θ\left(|V²|\right)$, da der Graph $θ\left(|V|\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
-	\item Bei dem Algorithmus handelt es sich um ein iteratives Programm.
-\end{itemize}
+Nachdem der Vorgänger von $v2$ nicht $v1$ ist wird die Kante $(v2,v1)$ gelöscht und es ergibt sich der Graph von Abbildung~\ref{figure:Test_2011-01-14-3A_Step3}.
 
 \begin{figure}[htbp]
 	\caption{Graph nach der dritten Anwendung von $FUNKTION1(v4)$}
@@ -685,6 +693,24 @@ Nach dem 4. Schritt erhalten wir sowohl das gleiche „previous”-Array als auc
 	\label{figure:Test_2011-01-14-3A_Step3}
 \end{figure}
 
+\subparagraph{4. Schritt}~\\
+
+Nach dem 4. Schritt erhalten wir sowohl das gleiche „previous”-Array als auch den gleichen Graphen wie im vorigen Schritt. Diesmal wird von der Funktion allerdings „false” zurückgegeben und der Algorithmus terminiert. Bei $G₂$ handelt es sich also um den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step3} dargestellten Graphen.
+
+\paragraph{b)}
+
+\begin{itemize}
+	\item Der Algorithmus beruht auf dem Tiefensuche-Prinzip (Aus dem Stack wird immer der Knoten der als letztes reingegeben wurde als erstes wieder entnommen und betrachtet).
+	\item „WasBinIch” entfernt die Kreise eines Graphen und bildet somit — bei einem zusammenhängenden Graphen — einen (Spann)-Baum.
+\end{itemize}
+
+\paragraph{c)}
+
+\begin{itemize}
+	\item Die Worst-Case Laufzeit beträgt bei einem vollständigen Graphen $θ\left(|V³|\right)$, da der Graph $θ\left(|V|²\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
+	\item Die \textbf{Worst}-Case Laufzeit beträgt bei einem dünnen Graphen $θ\left(|V²|\right)$, da der Graph $θ\left(|V|\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
+	\item Bei dem Algorithmus handelt es sich um ein iteratives Programm.
+\end{itemize}
 
 \section{Beispiel für dynamische Programmierung}
 
@@ -877,20 +903,20 @@ Nach der gleichen Vorgehensweise wie in den Schritten zuvor kommen wir, nachdem 
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
 			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
-			6 & 7\\
+				6 & 7\\
 			\hline
-			Keine Sorte			& {\color{orange}0} & 0 & 0 & 0	 &	0 &	 0 & 0 &
-			0	 \\
-			\textbf{Creme de la Creme}	& 0 &	&	& {\color{orange}10} &	  &
-			&	&	 \\
-			Brokkoli			& 0 & 3 &	& {\color{orange}10} & 13 &	   &
-			&	 \\
-			\textbf{Vanille}				& 0 & 3 & 7 & 10 & 13 &
-			{\color{orange}17} & 20 &	 \\
-			\textbf{Málaga}				& 0 & 3 & 8 & 11 & 15 & 18 & 21 &
-			{\color{orange}25} \\
-			Schokolade			& 0 & 3 & 8 & 11 & 15 & 18 & 21 &
-			{\color{orange}\emph{25}} \\
+			Keine Sorte			& {\color{orange}0} & 0 & 0 & 0	& 0 & 0 &
+				0 & 0\\
+			\textbf{Creme de la Creme} & 0 & & & {\color{orange}10} & & &
+				&\\
+			Brokkoli			& 0 & 3 & & {\color{orange}10} & 13 & &
+				&\\
+			\textbf{Vanille}	& 0 & 3 & 7 & 10 & 13 & {\color{orange}17} &
+				20 &\\
+			\textbf{Málaga}		& 0 & 3 & 8 & 11 & 15 & 18 & 21
+				& {\color{orange}25}\\
+			Schokolade			& 0 & 3 & 8 & 11 & 15 & 18 & 21
+				& {\color{orange}\emph{25}}\\
 		\end{tabular}
 	\end{center}
 \caption{Matrix nach der Betrachtung der fünften Eissorte}
