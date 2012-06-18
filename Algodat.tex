@@ -13,10 +13,10 @@
 % Citations
 \usepackage[style=alphabetic, backend=biber]{biblatex}
 	\addbibresource{References.bib}
-% Define colors
-\usepackage{color}
 % Context sensitive quotation
 \usepackage{csquotes}
+% Customized enumeration
+\usepackage{enumerate}
 % Extend options for positioning floats
 \usepackage{float}
 % Support highlighting of certain parts of the text
@@ -31,12 +31,12 @@
 \usepackage{moreverb}
 % Headings
 \usepackage[automark, nouppercase]{scrpage2}
-% Drawing support
-\usepackage{tikz}
 % To change the format of titles
 \usepackage{titlesec}
 % Support for unicode math fonts
 \usepackage{unicode-math}
+% Color support
+\usepackage{xcolor}
 % Extras for XƎTEX
 \usepackage{xltxtra}
 % Hyperlinks and pdf properties
@@ -55,7 +55,7 @@
 
 \newcommand{\TITLE}{Hilfsunterlagen}
 \newcommand{\TITLEDESCRIPTION}{Algorithmen und Datenstrukturen}
-\newcommand{\REVISION}{6}
+\newcommand{\REVISION}{7}
 \newcommand{\SUBJECT}{Diverse Unterlagen zur LVA Algorithmen und Datenstrukturen}
 \newcommand{\LOCATION}{Wien}
 \newcommand{\KEYWORDS}
@@ -78,6 +78,24 @@
 \definecolor{orange}{rgb}		{1,		0.54,	0}
 \definecolor{silver}{rgb}		{0.57,	0.57,	0.57}
 \definecolor{turquoise}{rgb}	{0,		0.86,	0.84}
+
+% -- Syntax Highlithing --------------------------------------------------------
+
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.69,0.49,0}{#1}}
+\newcommand{\hlesc}[1]{\textcolor[rgb]{1,0,1}{#1}}
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\newcommand{\hlpps}[1]{\textcolor[rgb]{0.51,0.51,0}{#1}}
+\newcommand{\hlslc}[1]{\textcolor[rgb]{0.51,0.51,0.51}{\it{#1}}}
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.51,0.51,0.51}{\it{#1}}}
+\newcommand{\hlppc}[1]{\textcolor[rgb]{0,0.51,0}{#1}}
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}
+\newcommand{\hllin}[1]{\textcolor[rgb]{0.33,0.33,0.33}{#1}}
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0,0,0}{\bf{#1}}}
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0,0.34,0.68}{#1}}
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0,0,0}{\bf{#1}}}
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0,0,0.51}{#1}}
+\definecolor{bgcolor}{rgb}{1,1,1}
 
 % -- Document Properties -------------------------------------------------------
 
@@ -974,6 +992,103 @@ Die „vollständige” Matrix für das vorhergehende Beispiel wird in Tabelle \
 \caption{„Vollständige” Tabelle}
 \label{table:Vollstaendig}
 \end{table}
+
+\section{Tests}
+
+\subsection{Uni Wien}
+
+\subsubsection{Test vom 3.10.2011}
+
+\paragraph{Aufgabe 1}
+
+\subparagraph{a)} Geben Sie ein Programm in C++ artigem Pseudocode an, dessen Aufwand von der Ordnung $Ω(n)$ und $O(n²)$, aber nicht von der Ordnung $Θ(n)$ oder $Θ(n²)$ ist.
+
+\begin{leftbar}
+	\input{Code/Aufgabe1a_2011_10_03}
+\end{leftbar}
+
+Aufwand: $Θ\left(n·\log\left(n\right)\right)$
+
+\subparagraph{b)}
+
+Geben Sie in C++ artigem Pseudocode eine rekursive Funktion an, deren Laufzeitordnung $Θ\left( n⁴ \log \left( n \right) \right)$ ist. Zeigen Sie mit Hilfe des Mastertheorems, dass Ihre Funktion wirklich die geforderte Laufzeitordnung hat.
+
+\begin{leftbar}
+	\input{Code/Aufgabe1b_2011_10_03}
+\end{leftbar}
+
+Da $\log_b (a) = c$ ergibt sich eine Laufzeit $T(n) = n^c \log n = n^4 \log n$.
+
+\paragraph{Aufgabe 2}
+
+Addieren Sie zu Ihrer Matrikelnummer die Zahl 573296148. Die Ziffern der Summe seien in der Reihenfolge von links nach rechts in einem Array gespeichert. Sortieren Sie die Ziffern aufsteigend mit
+
+\begin{enumerate}[a.]
+	\item Counting Sort.
+	\item Quicksort.
+	\item Selection Sort.
+\end{enumerate}
+
+Geben Sie jeweils alle benötigten Zwischenschritte so genau an, dass der Ablauf des Algorithmus klar ersichtlich wird.
+
+\subparagraph{a)}
+
+$ Matrikelnummer + 573 296 148 = 1 234 567 + 573 296 148 =  574 530 715 $\\
+
+Zu sortierendes Array (A):
+\begin{center}
+	\newcommand{\columnWidth}{0.5cm}
+	\begin{tabular}{|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}
+					|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}
+					|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}|}
+		\hline
+		5 & 7 & 4 & 5 & 3 & 0 & 7 & 1 & 5\\
+		\hline
+	\end{tabular}
+\end{center}
+
+Zählerarray (C):
+
+\begin{center}
+	\newcommand{\columnWidth}{0.5cm}
+	\begin{tabular}{|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}
+					|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}
+					|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}|
+					p{\columnWidth}|}
+		\hline
+		0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
+		\hline
+		\hline
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+		1 & 1 & 0 & 1 & 1 & 3 & 0 & 2 & 0 & 0\\
+		1 & 2 & 2 & 3 & 4 & 7 & 7 & 9 & 9 & 9\\
+		\hline
+	\end{tabular}
+\end{center}
+
+Sortiertes Array (B):
+
+\begin{center}
+	\newcommand{\columnWidth}{0.5cm}
+	\begin{tabular}{|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}
+					|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}
+					|p{\columnWidth}|p{\columnWidth}|p{\columnWidth}|}
+		\hline
+		 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		\hline
+		   &   &   &   &   &   & 5 &   &   \\
+		   & 1 &   &   &   &   & 5 &   &   \\
+		   & 1 &   &   &   &   & 5 & 7 &   \\
+		 0 & 1 &   &   &   &   & 5 & 7 &   \\
+		 0 & 1 & 3 &   &   &   & 5 & 7 &   \\
+		 0 & 1 & 3 &   &   & 5 & 5 & 7 &   \\
+		 0 & 1 & 3 & 4 &   & 5 & 5 & 7 &   \\
+		 0 & 1 & 3 & 4 &   & 5 & 5 & 7 & 7 \\
+		 0 & 1 & 3 & 4 & 5 & 5 & 5 & 7 & 7 \\
+		\hline
+	\end{tabular}
+\end{center}
+
 
 %-- Bibliography ---------------------------------------------------------------
 
