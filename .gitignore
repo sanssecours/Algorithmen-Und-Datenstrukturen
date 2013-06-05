@@ -1,0 +1,14 @@
+# Ignore files created by (Xe)LaTeX
+/*.pdf
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.toc
+# Ignore files created by `highlight`
+/Code/*
