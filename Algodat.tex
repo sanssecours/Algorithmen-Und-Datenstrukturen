@@ -1,10 +1,10 @@
 %!TEX TS-program = xelatex
 
-% -- Document Class ------------------------------------------------------------
+% -- Document Class -----------------------------------------------------------
 
 \documentclass[a4paper, 12pt]{article}
 
-% -- Packages ------------------------------------------------------------------
+% -- Packages -----------------------------------------------------------------
 
 % Language
 \usepackage{polyglossia}
@@ -13,6 +13,8 @@
 % Citations
 \usepackage[style=alphabetic, backend=biber]{biblatex}
 	\addbibresource{References.bib}
+% Caption support
+\usepackage{caption}
 % Context sensitive quotation
 \usepackage{csquotes}
 % Customized enumeration
@@ -36,29 +38,34 @@
 % Support for unicode math fonts
 \usepackage{unicode-math}
 % Color support
-\usepackage{xcolor}
+\usepackage[x11names]{xcolor}
 % Extras for XƎTEX
 \usepackage{xltxtra}
 % Hyperlinks and pdf properties
 \usepackage{hyperref}
 
-% -- Fonts ---------------------------------------------------------------------
+% -- Fonts --------------------------------------------------------------------
 
+% Use same size for numbers and other text
 \defaultfontfeatures{Numbers=Lining}
-\setmainfont[Mapping=tex-text]{EB Garamond}
-\setsansfont[Mapping=tex-text]{Helvetica Neue}
+
+% Set fonts for document
+\setmainfont[Mapping=tex-text]{Avenir Next}
+\setsansfont[Mapping=tex-text]{Ubuntu}
 \setmonofont[Scale=MatchLowercase]{Menlo}
 \setmathfont{Asana-Math.otf}
-\newfontfamily\zapfino{Zapfino}
 
-% -- Replacement Macros --------------------------------------------------------
+% Define font styles
+\newfontfamily\Zapfino{Zapfino}
 
-\newcommand{\TITLE}{Hilfsunterlagen}
-\newcommand{\TITLEDESCRIPTION}{Algorithmen und Datenstrukturen}
-\newcommand{\REVISION}{7}
-\newcommand{\SUBJECT}{Diverse Unterlagen zur LVA Algorithmen und Datenstrukturen}
-\newcommand{\LOCATION}{Wien}
-\newcommand{\KEYWORDS}
+% -- Macros -------------------------------------------------------------------
+
+\newcommand{\Title}{Hilfsunterlagen}
+\newcommand{\TitleDescription}{Algorithmen Und Datenstrukturen}
+\newcommand{\Version}{8}
+\newcommand{\Subject}{Diverse Unterlagen zur LVA Algorithmen und Datenstrukturen}
+\newcommand{\Location}{Wien}
+\newcommand{\Keywords}
 {
 	Algorithmen und Datenstrukturen 1,
 	Dynamische Programmierung,
@@ -66,47 +73,65 @@
 	Laufzeitbestimmung,
 	Matrix
 }
-\newcommand{\LEFTFOOTER}{Algodat-Hilfsunterlagen}
+\newcommand{\LeftFooter}{Algodat-Hilfsunterlagen}
 
-\newcommand{\AUTHORONE}{-}
-\newcommand{\MAILONE}{\href{mailto:sanssecours@f-m.fm}{sanssecours@f-m.fm}}
+\newcommand{\AuthorOne}{-}
+\newcommand{\MailOne}{\href{mailto:sanssecours@f-m.fm}{sanssecours@f-m.fm}}
 
-% -- Colors --------------------------------------------------------------------
+\newcommand{\codeinput}[1]
+{
+    \begin{leftbar}
+        \input{Code/#1}
+    \end{leftbar}
+}
 
-\definecolor{aqua}{rgb}			{0,		0.56,	1}
-\definecolor{grape}{rgb}		{0.56,	0,		1}
-\definecolor{orange}{rgb}		{1,		0.54,	0}
-\definecolor{silver}{rgb}		{0.57,	0.57,	0.57}
-\definecolor{turquoise}{rgb}	{0,		0.86,	0.84}
+% -- Colors -------------------------------------------------------------------
 
-% -- Syntax Highlithing --------------------------------------------------------
+% Background color for syntax highlighting
+\definecolor{bgcolor}{rgb}      {1,     1,      1}
 
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0,0,0}{#1}}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.69,0.49,0}{#1}}
+% Custom color definitions
+\definecolor{aqua}{rgb}         {0,     0.56,   1}
+\definecolor{bluegray}{rgb}     {0.22,  0.46,   0.84}
+\definecolor{grape}{rgb}        {0.56,  0,      1}
+\definecolor{orchid}{rgb}       {0.41,  0.13,   0.55}
+\definecolor{orange}{rgb}       {1,     0.54,   0}
+\definecolor{silver}{rgb}       {0.57,  0.57,   0.57}
+\definecolor{turquoise}{rgb}    {0,     0.86,   0.84}
+
+% -- Syntax Highlithing -------------------------------------------------------
+
+% Syntax highlighting definitions
+% Text
+\newcommand{\hlstd}[1]{\textcolor{black}{#1}}
+% Numbers
+\newcommand{\hlnum}[1]{\textcolor{DarkOrchid4}{#1}}
 \newcommand{\hlesc}[1]{\textcolor[rgb]{1,0,1}{#1}}
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+% Strings
+\newcommand{\hlstr}[1]{\textcolor{SeaGreen3}{#1}}
 \newcommand{\hlpps}[1]{\textcolor[rgb]{0.51,0.51,0}{#1}}
 \newcommand{\hlslc}[1]{\textcolor[rgb]{0.51,0.51,0.51}{\it{#1}}}
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.51,0.51,0.51}{\it{#1}}}
+\newcommand{\hlcom}[1]{\textcolor{aqua}{#1}}
 \newcommand{\hlppc}[1]{\textcolor[rgb]{0,0.51,0}{#1}}
 \newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}
 \newcommand{\hllin}[1]{\textcolor[rgb]{0.33,0.33,0.33}{#1}}
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0,0,0}{\bf{#1}}}
+% Keywords
+\newcommand{\hlkwa}[1]{\textcolor{DodgerBlue3}{#1}}
 \newcommand{\hlkwb}[1]{\textcolor[rgb]{0,0.34,0.68}{#1}}
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0,0,0}{\bf{#1}}}
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0,0,0.51}{#1}}
-\definecolor{bgcolor}{rgb}{1,1,1}
+\newcommand{\hlkwc}[1]{\textcolor{DarkOrchid4}{#1}}
+% Functions
+\newcommand{\hlkwd}[1]{\textcolor{orange}{#1}}
 
-% -- Document Properties -------------------------------------------------------
+% -- Document Properties ------------------------------------------------------
 
 \setlength\parindent{0cm}
 
 \hypersetup
 {
-	pdftitle	= {\TITLE},
-	pdfsubject	= {\SUBJECT},
-	pdfauthor	= {\AUTHORONE},
-	pdfkeywords = {\KEYWORDS},
+	pdftitle	= {\Title},
+	pdfsubject	= {\Subject},
+	pdfauthor	= {\AuthorOne},
+	pdfkeywords = {\Keywords},
 	colorlinks	= true,
 	linkcolor	= black,
 	anchorcolor = black,
@@ -114,69 +139,100 @@
 	urlcolor	= orange
 }
 
-% -- Header and Footer ---------------------------------------------------------
+% -- Header and Footer --------------------------------------------------------
 
 \clearscrheadings
 \renewcommand{\headfont}{\normalfont}
 \ihead{\headmark}
 \ohead{}
-\ifoot{\LEFTFOOTER}
+\ifoot{\LeftFooter}
 \ofoot{\thepage/\pageref{LastPage}}
 
 \setlength{\headheight}{1.8\baselineskip}
 \setheadsepline{0.5pt}
 \setfootsepline{0.5pt}
 
-% -- Sections ------------------------------------------------------------------
-
-\definecolor{aqua}{rgb}{0,0.56,1.0}
-\titleformat{\section}{\sffamily\bfseries}{}{0pt}{\large}[{\color{aqua}\hrule}]
-
-% -- Titlepage -----------------------------------------------------------------
+% -- Titlepage ----------------------------------------------------------------
 
 \pagestyle{empty}
 \begin{document}
 
 \begin{titlepage}
-	\begin{center}
-		{\Huge\zapfino \TITLE}
-		\vskip 1cm
-		{\Large\textit\TITLEDESCRIPTION}
-		\vskip 2cm
-		\hrule
-		\vskip 0.5cm
-		\begin{tabular}{p{8cm}l}
-			Revision \REVISION	& \MAILONE\\
-		\end{tabular}
-		\vskip 0.5cm
-		\hrule
-		\vskip 11cm
-	\end{center}
-	\begin{flushright}
-		\today
-	\end{flushright}
+    \begin{center}
+        % Title and title-description
+        {\Huge\Zapfino\Title}
+        \vskip 0.5cm
+        {\color{aqua}\hrule}
+        \vskip 0.5cm
+        {\Large\textit\TitleDescription}
+        \vskip 14cm
+    \end{center}
+
+    % Date and version number
+    \begin{leftbar}
+        \begin{tabular}{ll}
+            \textbf{Kontakt}    & \MailOne\\
+            \textbf{Version}    & \Version\\
+            \textbf{Datum}      & \today
+        \end{tabular}
+    \end{leftbar}
+
 \end{titlepage}
 
-% -- Table of Contents ---------------------------------------------------------
+
+% -- Table of Contents --------------------------------------------------------
+
+% Set section format for table of contents
+\titleformat{\section}{\sffamily\bfseries}{}{0pt}{}[{\color{aqua}\hrule}]
 
 \makeatletter \renewcommand{\@dotsep}{10000} \makeatother
 \newpage
 \setcounter{page}{2}
 \tableofcontents
+
+% -- Section & Paragraph Style ------------------------------------------------
+
+% Set format for section
+\titleformat{\section}
+    {\large\sffamily\bfseries}  % Large, bold, sans serif font for section
+    {}                          % No format applied to whole title
+    {0pt}                       % No separation between label and title
+    {\thesection~·~}            % Start with section number
+    [{\color{aqua}\hrule}]      % Underline with blue ruler
+
+% Set format for other sections and paragraphs
+% Color = orchid, Font = bold, sans serif
+\titleformat*{\subsection}{\color{orchid}\sffamily\bfseries}
+\titleformat*{\subsubsection}{\color{orchid}\sffamily\bfseries}
+\titleformat*{\paragraph}{\color{orchid}\sffamily\bfseries}
+\titleformat*{\subparagraph}{\color{orchid}\sffamily\bfseries}
+
+% -- Page Style ---------------------------------------------------------------
+
 \newpage
 \pagestyle{scrheadings}
 
-%-- Text -----------------------------------------------------------------------
+%-- Text ----------------------------------------------------------------------
 
 \begin{abstract}
-	\noindent Dieser Text ist mit der Absicht entstanden zu helfen. Ich habe ihn somit natürlich nicht aus Absicht mit Fehlern gespickt. Trotzdem ist es doch sehr wahrscheinlich, dass er Fehler enthält. Ich bitte das zu Entschuldigen, und möchte damit den Hinweis geben, dass für jeglichen Inhalt dieses Textes \emph{absolut kein Gewähr auf Richtigkeit} gegeben wird.\\
 
-	\noindent Solltet ihr Fehler im Text finden wäre es sehr nett wenn ihr mir eine \href{mailto:sanssecours@f-m.fm}{e-Mail} schreibt, damit ich sie ausbessern kann.
+	\noindent Dieser Text ist mit der Absicht entstanden zu helfen. Ich habe
+    ihn somit natürlich nicht aus Absicht mit Fehlern gespickt. Trotzdem ist
+    es doch sehr wahrscheinlich, dass er Fehler enthält. Ich bitte das zu
+    entschuldigen, und möchte damit den Hinweis geben, dass für jeglichen
+    Inhalt dieses Textes \emph{absolut kein Gewähr auf Richtigkeit} gegeben
+    wird.\\
+
+	\noindent Solltet ihr Fehler im Text finden wäre es sehr nett wenn ihr mir
+    eine \href{mailto:sanssecours@f-m.fm}{e-Mail} schreibt, damit ich sie
+    ausbessern kann.
+
 \end{abstract}
 
 \section{Laufzeiten}
 
-\subsection{Beweisen oder Wiederlegen des asymptotischen Wachstums von Funktionen}
+\subsection{Beweisen oder Wiederlegen des asymptotischen Wachstums von
+Funktionen}
 
 \subsubsection{Umformung}
 
@@ -186,28 +242,35 @@ Der erste Schritt am Anfang der Analyse einer Funktion wie z.B.
 	\label{function:Laufzeit}
 	f(n) = \left\{
 	\begin{array}{l l}
-		2⋅ n² + \frac{n²}{2} + 10 & \quad \text{wenn $n < 50$}\\
+		2⋅ n² + \frac{n²}{2} + 10 & \text{wenn $n < 50$}\\
 
-		0.5 ⋅ n^\frac{1}{2} & \quad \text{wenn $n$ ungerade und $n ≥ 50$}\\
+		0.5 ⋅ n^\frac{1}{2}       & \text{wenn $n$ ungerade und $n ≥ 50$}\\
 
-		\frac{1}{2}⋅ n + \frac{n²}{n} ⋅ \log\left(n²\right) - \frac{1}{10} &
-		\quad \text{sonst}
+		\frac{1}{2}⋅ n + \frac{n²}{n} ⋅ \log\left(n²\right) - \frac{1}{10}
+                                  & \text{sonst}
 	\end{array} \right.
 \end{equation}
 
-besteht darin zu bestimmen welche Teile der Funktion für unendlich viele $n$ gelten und welche Glieder wiederum ab eine bestimmten $n$ nicht mehr vorkommen, also nur für endlich viele $n$ gelten.\\
+besteht darin zu bestimmen welche Teile der Funktion für unendlich viele $n$
+gelten und welche Glieder wiederum ab eine bestimmten $n$ nicht mehr
+vorkommen, also nur für endlich viele $n$ gelten.\\
 
-In Funktion \ref{function:Laufzeit} kann man den ersten Zweig vernachlässigen da er ab $n ≥ 50$ nicht mehr gilt. Damit man diesen Teil auch wirklich nicht beachten muss ist $n₀$ auf einen Wert $≥ 50$ zu setzen. Der nächste Schritt besteht darin die Funktion ein wenig zu vereinfachen. Dazu einmal ein paar einfache mathematische Umformungen die hier recht nützlich sind:
+In Funktion \ref{function:Laufzeit} kann man den ersten Zweig vernachlässigen
+da er ab $n ≥ 50$ nicht mehr gilt. Damit man diesen Teil auch wirklich nicht
+beachten muss ist $n₀$ auf einen Wert $≥ 50$ zu setzen. Der nächste Schritt
+besteht darin die Funktion ein wenig zu vereinfachen. Dazu einmal ein paar
+einfache mathematische Umformungen die hier recht nützlich sind:
 
 \[
 	a^{\frac{1}{b}} = \sqrt[b] a	\quad~
-	 a^{-b} = \frac{1}{a^b}			\quad~
+	a^{-b} = \frac{1}{a^b}			\quad~
 	\frac{a^b}{a^c} = a^{b-c}		\quad~
 	a^b ⋅ a^c = a^{b+c}				\quad~
 	\log\left(a^b\right) = b⋅ \log\left(a\right)
 \]
 
-Nach der Umformung der Funktion ohne den ersten Zweig, den wir ohnehin für den Beweis/Widerlegung vernachlässigen wollen bekommen wir:
+Nach der Umformung der Funktion ohne den ersten Zweig, den wir ohnehin für den
+Beweis/Widerlegung vernachlässigen wollen bekommen wir:
 
 \begin{figure}[H]
 		\caption{Vereinfachte Funktion für $n≥50$}
@@ -215,21 +278,32 @@ Nach der Umformung der Funktion ohne den ersten Zweig, den wir ohnehin für den 
 \[
 	f(n) = \left\{
 	\begin{array}{l l}
-		0.5⋅ \sqrt n & \quad \text{wenn $n$ ungerade}\\
-
+		0.5⋅ \sqrt n        & \text{wenn $n$ ungerade}\\
 		\frac{1}{2}⋅ n + 2 n ⋅ \log\left(n\right) - \frac{1}{10}
-		& \quad \text{sonst}
+                            & \quad \text{sonst}
 	\end{array} \right.
 \]
 \end{figure}
 
 \subsubsection{Vereinfachte Terme mit asymptotisch gleicher Laufzeit in Theta-Notation}
 
-Als nächsten Schritt könne wir jetzt Terme für die Zweige unserer Funktionen bestimmen die die „gleiche” Laufzeit wie die Terme unserer ursprünglichen Funktion besitzen. Das ist vor allem praktisch wenn wir angeben wollen wie die unteren und oberen Schranken unserer Funktion aussehen. Dazu bestimmen wir in jedem Zweig den „größten” und somit den für die Laufzeit bestimmenden Teil.\\
+Als nächsten Schritt könne wir jetzt Terme für die Zweige unserer Funktionen
+bestimmen die die „gleiche” Laufzeit wie die Terme unserer ursprünglichen
+Funktion besitzen. Das ist vor allem praktisch wenn wir angeben wollen wie die
+unteren und oberen Schranken unserer Funktion aussehen. Dazu bestimmen wir in
+jedem Zweig den „größten” und somit den für die Laufzeit bestimmenden Teil.\\
 
-In der zweiten Zweig unserer Funktion ist der bestimmende Teil der Term $\sqrt n$. Die Konstante können wir streichen da sie nichts am asymptotischen Wachstum der Funktion ändert.\\
+In der zweiten Zweig unserer Funktion ist der bestimmende Teil der Term $\sqrt
+n$. Die Konstante können wir streichen, da sie nichts am asymptotischen
+Wachstum der Funktion ändert.\\
 
-Im dritten Zweig könne wir erkennen, dass „$2 n ⋅ \log n$” den für das Wachstum wichtigen Teil darstellt. Die Konstante spielt keine Rolle für das Wachstum. Somit kommen wir hier auf den Term „$n \log n$” der asymptotisch gleiches Wachstum wie unsere Ausgangsterm aufweist. Die gesamte vereinfachte Funktion, die für ein $n≥ 50$ das gleiche Wachstum wie die Ausgangsfunktion aufweist ist in Abbildung \ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum} zu sehen.
+Im dritten Zweig könne wir erkennen, dass „$2 n ⋅ \log n$” den für das
+Wachstum wichtigen Teil darstellt. Die Konstante spielt keine Rolle für das
+Wachstum. Somit kommen wir hier auf den Term „$n \log n$” der asymptotisch
+gleiches Wachstum wie unsere Ausgangsterm aufweist. Die gesamte vereinfachte
+Funktion, die für ein $n≥ 50$ das gleiche Wachstum wie die Ausgangsfunktion
+aufweist ist in Abbildung \ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum}
+zu sehen.
 
 \begin{figure}[H]
 	\caption{Funktion mit asymptotisch gleichem Wachstum wie die
@@ -239,31 +313,44 @@ Im dritten Zweig könne wir erkennen, dass „$2 n ⋅ \log n$” den für das W
 	\label{function:Laufzeit_Vereinfacht}
 	f(n) = \left\{
 	\begin{array}{l l}
-		\sqrt n & \quad \text{wenn $n$ ungerade}\\
-
-		n \log n & \quad \text{sonst}
+		\sqrt n     & \quad \text{wenn $n$ ungerade}\\
+		n \log n    & \quad \text{sonst}
 	\end{array} \right.
 \]
 \end{figure}
 
-Aus der vereinfachte Funktion können wir gleich erkennen, dass alle Funktionen die eine Laufzeit in $θ\left(n \log n\right)$ besitzen oder schneller wachsen eine obere Schranke für unsere Funktion darstellen. Alle Funktionen die eine Laufzeit in $θ\left( \sqrt n\right)$ aufweisen oder langsamer wachsen stellen eine untere Schranke dar. Die Funktion $g\left(n\right)=n$ hingegen würde weder eine untere noch eine obere Schranke darstellen da sie zwar ein schnelleres Wachstum als der erste Zweig unserer Funktion aufweist aber eben auch langsamer als der zweite Zweig wächst.
+Aus der vereinfachte Funktion können wir gleich erkennen, dass alle Funktionen
+die eine Laufzeit in $θ\left(n \log n\right)$ besitzen oder schneller wachsen
+eine obere Schranke für unsere Funktion darstellen. Alle Funktionen die eine
+Laufzeit in $θ\left( \sqrt n\right)$ aufweisen oder langsamer wachsen stellen
+eine untere Schranke dar. Die Funktion $g\left(n\right)=n$ hingegen würde
+weder eine untere noch eine obere Schranke darstellen, da sie zwar ein
+schnelleres Wachstum als der erste Zweig unserer Funktion aufweist, aber eben
+auch langsamer als der zweite Zweig wächst.
 
 \subsubsection{Beweis}
 
-Wir wollen nun beweisen, dass $\sqrt n$ eine untere Schranke für unsere Funktion darstellt also $f\left(n\right) = Ω \left(\sqrt n\right)$ gilt. Dazu schreiben wir als erstes laut Definition an:
+Wir wollen nun beweisen, dass $\sqrt n$ eine untere Schranke für unsere
+Funktion darstellt also $f\left(n\right) = Ω \left(\sqrt n\right)$ gilt. Dazu
+schreiben wir als erstes laut Definition an:
 \[
-	f\left(n\right)=Ω \left(\sqrt n\right) \Rightarrow
-	∃ c,n > 0 \quad ∀ n≥ n₀: 0 ≤ c ⋅ \sqrt n≤
-	f\left(n\right)
+	f\left(n\right)=Ω \left(\sqrt n\right) \quad ⇒ \quad
+	∃ c,n > 0 \quad ∀ n≥ n₀: 0 ≤ c ⋅ \sqrt n ≤ f\left(n\right)
 \]
 
-Wir müssen diese Bedingung nun für beide Zweige beweisen und passende Werte für $c$ und $n₀$ finden, wobei wir von $n₀$ schon wissen, dass wir einen Wert $≥ 50$ nehmen sollten, da wir ansonsten auch den ersten Zweig unserer Funktion beachten müssten, der nur für $n < 50$ gilt. Wir sehen uns nun die beiden anderen Zweige in der vereinfachten Form aus Abbildung~\ref{figure:Vereinfachte_Funktion} an.
+Wir müssen diese Bedingung nun für beide Zweige beweisen und passende Werte
+für $c$ und $n₀$ finden, wobei wir von $n₀$ schon wissen, dass wir einen Wert
+$≥ 50$ nehmen sollten, da wir ansonsten auch den ersten Zweig unserer Funktion
+beachten müssten, der nur für $n < 50$ gilt. Wir sehen uns nun die beiden
+anderen Zweige in der vereinfachten Form aus
+Abbildung~\ref{figure:Vereinfachte_Funktion} an.
 
 \[
 	∃ c,n > 0 \quad ∀ n ≥ n₀ : 0 ≤ c⋅ \sqrt n ≤ 0.5 ⋅ \sqrt n
 \]
 
-Hier erkennt man direkt aus dem angeschriebenen Werten, dass diese Gleichung für $c ≤ 0.5$ gilt. Kommen wir nun zum interessanteren zweiten Zweig:
+Hier erkennt man direkt aus dem angeschriebenen Werten, dass diese Gleichung
+für $c ≤ 0.5$ gilt. Kommen wir nun zum interessanteren zweiten Zweig:
 
 \[
 	∃ c,n > 0 \quad ∀ n≥ n₀:
@@ -277,12 +364,20 @@ Wir dividieren durch $\sqrt n$ und kommen damit auf:
 	\frac{1}{2} \sqrt n + 2 \sqrt n ⋅ \log\left(n\right) - \frac{1}{10\sqrt n}
 \]
 
-Der rechte Teil wächst somit mit steigendem $n$. Wir können also ein $c$ finden dass ab einem bestimmten Wert $n₀$ immer kleiner bleibt als unsere Funktion. Setzten wir nun z.B. für $n = 50$ ein ergibt sich ein Wert von ca. 28. Somit können wir als Konstanten die für beide Zweige der Funktion gelten z.B. $n₀=50$ und $c=0.5$ wählen.
+Der rechte Teil wächst somit mit steigendem $n$. Wir können also ein $c$
+finden dass ab einem bestimmten Wert $n₀$ immer kleiner bleibt als unsere
+Funktion. Setzten wir nun z.B. für $n = 50$ ein ergibt sich ein Wert von ca.
+28. Somit können wir als Konstanten die für beide Zweige der Funktion gelten
+z.B. $n₀=50$ und $c=0.5$ wählen.
 
 \subsubsection{Widerlegung}
 
-Wir wollen nun widerlegen, dass unsere Funktion ein Wachstum von $θ \left(n \log n\right)$ besitzt. Aus Abbildung \ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum} können wir erkennen, dass das Wachstum für einen der Zweige  $θ \left(n \log n\right)$ ist. Wir nehmen also den anderen Teil um die Behauptung zu widerlegen und schreiben laut Definition:
-
+Wir wollen nun widerlegen, dass unsere Funktion ein Wachstum von $θ \left(n
+\log n\right)$ besitzt. Aus Abbildung
+\ref{Figure:Vereinfachte_Funktion_Gleiches_Wachstum} können wir erkennen, dass
+das Wachstum für einen der Zweige $θ \left(n \log n\right)$ ist. Wir nehmen
+also den anderen Teil um die Behauptung zu widerlegen und schreiben laut
+Definition:
 \[
 	∃ c₁,c₂, n > 0 \quad ∀ n ≥ n₀ ~ : ~
 	0 ≤ c₁⋅ n \log n ≤ 0.5 ⋅ \sqrt n ≤ c₂ ⋅ n \log n
@@ -291,9 +386,17 @@ Wir dividieren ähnlich wie zum Beweis von vorher durch $n \log n$.
 \[
 	0 ≤ c₁ ≤ \frac{0.5}{\sqrt{n}\log n} ≤ c₂
 \]
-Man kann erkennen, dass die Funktion gegen 0 konvergiert, der Wert der Funktion wird also immer kleiner je größer $n$ wird. Mit dieser Erkenntnis können wir ein $c₂$ finden, dass die Funktion nach oben begrenzt und sehen somit dass $f\left(n\right)=O\left(n\log n\right)$ für diesen Zweig gilt. Wir können aber kein $c₁ > 0$ angeben das ab einem bestimmten positiven Wert $n$ immer kleiner als der Wert der Funktion ist, da wir immer ein größeres $n$ finden können ab dem ein bestimmter Wert größer 0 unterschritten wird.\\
+Man kann erkennen, dass die Funktion gegen 0 konvergiert. Der Wert der
+Funktion wird also immer kleiner je größer $n$ wird. Mit dieser Erkenntnis
+können wir ein $c₂$ finden, dass die Funktion nach oben begrenzt und sehen
+somit dass $f\left(n\right)=O\left(n\log n\right)$ für diesen Zweig gilt. Wir
+können aber kein $c₁ > 0$ angeben das ab einem bestimmten positiven Wert $n$
+immer kleiner als der Wert der Funktion ist, da wir immer ein größeres $n$
+finden können ab dem ein bestimmter Wert größer 0 unterschritten wird.\\
 
-Somit hat die Funktion keine untere Schranke $n \log n$	 $\left(f(n \log n)≠ Ω(n)\right)$ und damit auch nicht die „gleiche Laufzeit” wie $n \log n \Rightarrow f(n) ≠ θ(n \log n)$.
+Somit hat die Funktion keine untere Schranke $n \log n$ $\left(f(n \log n) ≠
+Ω(n)\right)$ und damit auch nicht die „gleiche Laufzeit” wie $n \log n ⇒ f(n)
+≠ θ(n \log n)$.
 
 \subsection{Kreuzerlbeispiele Laufzeiten}
 
@@ -309,10 +412,10 @@ Somit hat die Funktion keine untere Schranke $n \log n$	 $\left(f(n \log n)≠ �
 			\hline
 			Annahme & \multicolumn{4}{|c|}{Folgerung: $f\left(n\right)$ ist}\\
 
-			& $Ω\left(g\left(n\right)\right)$ &
-			$O\left(g\left(n\right)\right)$ &
-			$Ω\left(h\left(n\right)\right)$ &
-			$O\left(h\left(n\right)\right)$\\
+			& $Ω\left(g\left(n\right)\right)$
+            & $O\left(g\left(n\right)\right)$
+            & $Ω\left(h\left(n\right)\right)$
+            & $O\left(h\left(n\right)\right)$\\
 			\cline{2-5}
 
 			$f\left(n\right) = O\left(g\left(n\right) + f\left(n\right)\right)
@@ -330,57 +433,43 @@ In Tabelle~\ref{table:Test_2010-11-26_1Ab} darf kein Feld angekreuzt werden, da 
 
 \paragraph{Verschachtelte Schleifen}~\\
 
-Bei verschachtelten Schleifen werden die Laufzeiten multipliziert sofern diese unabhängig sind. Das heißt es werden in der inneren Schleife keine Werte verändert die die Laufvariable der äußeren Schleife ändern und umgekehrt. Folgender Code zeigt zwei unabhängige Schleifen:
+Bei verschachtelten Schleifen werden die Laufzeiten multipliziert sofern diese
+unabhängig sind. Das heißt es werden in der inneren Schleife keine Werte
+verändert die die Laufvariable der äußeren Schleife ändern und umgekehrt.
+Folgender Code zeigt zwei unabhängige Schleifen:
 
-\begin{verbatimtab}
-j = n
-for i = 1...log(n) {
-	for j > 1 {
-		c = 10 + 1
-		j = j - 1
-	}
-	j = n
-}
-\end{verbatimtab}
+\codeinput{Independent_Loops}
 
-Die Laufzeiten der äußeren Schleife $θ\left(\log\left(n\right)\right)$ und der inneren Schleife $θ\left(n\right)$ zusammen ergibt eine Gesamtlaufzeit von $θ\left( n⋅\log\left(n\right) \right)$.\\
+Die Laufzeiten der äußeren Schleife $θ\left(\log\left(n\right)\right)$ und der
+inneren Schleife $θ\left(n\right)$ zusammen ergibt eine Gesamtlaufzeit von
+$θ\left( n⋅\log\left(n\right) \right)$.\\
 
-Zwei voneinander abhängige Schleifen werden z.B. in Abschnitt \ref{section:Test_2007-11-16} gezeigt.
+Zwei voneinander abhängige Schleifen werden z.B. in Abschnitt
+\ref{section:Test_2007-11-16} gezeigt.
 
 \paragraph{Zurücksetzten von Variablen}~\\
 
 Der folgende Code zeigt zwei verschachtelte Schleifen.
 
-\begin{verbatimtab}
-i = n
-j = n
-for i > 0 {
-	i = i - 1
-	for j > 0 {
-		c = c + 1
-		j = j - 1
-	}
-}
-\end{verbatimtab}
+\codeinput{Two_Dependent_Loops}
 
-Auf den ersten Blick könnte man vermuten, dass es sich um eine Laufzeit in $θ\left(n²\right)$ handelt. Da \texttt{j} aber nur einmal am Anfang auf \texttt{n} gesetzt wird, wird die innere Schleife zwar \texttt{n} mal durchgeführt, das geschieht allerdings nur im ersten Durchlauf der äußeren Schleife. Somit kann man die Laufzeit der inneren Schleife vernachlässigen und kommt somit auf eine Laufzeit von $θ\left(n\right)$. Der folgende Code zeigt die Änderung die vorgenommen werden müsste damit wir eine Laufzeit von $θ\left(n²\right)$ erhalten:
+Auf den ersten Blick könnte man vermuten, dass sich hier eine Laufzeit von
+$θ\left(n²\right)$ ergibt. Da \texttt{j} aber nur einmal am Anfang auf
+\texttt{n} gesetzt wird, wird die innere Schleife zwar \texttt{n} mal
+durchgeführt, das geschieht allerdings nur im ersten Durchlauf der äußeren
+Schleife. Somit kann man die Laufzeit der inneren Schleife vernachlässigen und
+kommt somit auf eine Laufzeit von $θ\left(n\right)$. Der folgende Code zeigt
+die Änderung die vorgenommen werden müsste damit wir eine Laufzeit von
+$θ\left(n²\right)$ erhalten:
 
-\begin{verbatimtab}
-i = n
-j = n
-for i > 0 {
-	i = i - 1
-	for j > 0 {
-		c = c + 1
-		j = j - 1
-	}
-	j=n
-}
-\end{verbatimtab}
+\codeinput{Two_Dependent_Loops_Quadratic}
 
 \paragraph{Änderungen von Werten}~\\
 
-Bei vielen Aufgaben stellt sich die Frage wie oft denn z.B. ein bestimmter Term von einer Variable abgezogen oder addiert werden kann bis die Variable einen anderen Wert (z.B 0,n,\dots) erreicht. Grundsätzlich gibt es ein paar verschiedene Varianten die üblicherweise auftreten:
+Bei vielen Aufgaben stellt sich die Frage wie oft denn z.B. ein bestimmter
+Term von einer Variable abgezogen oder addiert werden kann bis die Variable
+einen anderen Wert (z.B 0,n,\dots) erreicht. Grundsätzlich gibt es ein paar
+verschiedene Varianten die üblicherweise auftreten:
 
 \begin{itemize}
 	\item eine Konstante wird abgezogen/addiert z.B. $a=a-1, a=a+1$
@@ -391,72 +480,90 @@ Bei vielen Aufgaben stellt sich die Frage wie oft denn z.B. ein bestimmter Term 
 
 Ein Beispiel für den erste Punkt wäre:
 
-\begin{verbatimtab}
-i = 0
-für i < log n {
-	i=i+1
-}
-\end{verbatimtab}
+\codeinput{Add_Constant}
 
-Die äußere Schleife läuft hier $\log\left(n\right)$ mal bis wir den Wert von $\log\left(n\right)$ erreichen und kommt somit auch auf eine Laufzeit von $θ \left(log\left(n\right)\right)$. Nach dem gleichen Schema ergibt sich bei nachfolgendem Beispiel eine Laufzeit in $θ \left(n \sqrt n \right)$:
+Die äußere Schleife läuft hier $\log\left(n\right)$ mal bis wir den Wert von
+$\log\left(n\right)$ erreichen und kommt somit auch auf eine Laufzeit von $θ
+\left(log\left(n\right)\right)$. Nach dem gleichen Schema ergibt sich bei
+nachfolgendem Beispiel eine Laufzeit in $θ \left(n \sqrt n \right)$:
 
-\begin{verbatimtab}
-a = n * sqrt (n)
-solange a > 0 {
-	a = a - 2
-}
-\end{verbatimtab}
+\codeinput{Subtract}
 
-Die wiederholte Multiplikation mit einem Wert bedeutet üblicherweise, dass sich eine exponentielle Laufzeit ergibt. Die Umkehrung der Operation also die Division durch einen bestimmten Wert weist folglich meist auf eine logarithmische Laufzeit hin.
+Die wiederholte Multiplikation mit einem Wert bedeutet üblicherweise, dass
+sich eine exponentielle Laufzeit ergibt. Die Umkehrung der Operation, also die
+Division durch einen bestimmten Wert, weist folglich meist auf eine
+logarithmische Laufzeit hin.
 
 \subsubsection{Beispiele}
 
 \paragraph{Test vom 16.11.2007}~\\
 \label{section:Test_2007-11-16}
 
-\begin{figure}[htbp]
-	\caption{Beispiel 1.c) der Gruppe A}
-	\vskip 0.2cm
-	\centering
-	\includegraphics{Figures/Test_2007-11-16_1Ac}
-	\label{figure:Test_2007-11-16_1Ac}
-\end{figure}
+Die innerste solange-Schleife des in
+Abbildung~\ref{figure:Test_2007-11-16_1Ac} zu sehenden Codestücks wird auf
+Grund dessen, dass die Variable $l$ nicht mehr rückgesetzt wird, nur ein
+einziges mal, im allerersten Durchlauf der beiden äußeren Schleifen
+durchgeführt. Damit kann man die Laufzeit der inneren Schleife
+vernachlässigen, da sie für alle anderen Durchläufe einen konstanten
+zeitlichen Aufwand besitzt.
 
-Die innerste solange-Schleife des in Abbildung~\ref{figure:Test_2007-11-16_1Ac} zu sehenden Codestücks wird auf Grund dessen, dass die Variable $l$ nicht mehr rückgesetzt wird nur ein einziges mal, im allerersten Durchlauf der beiden äußeren Schleifen durchgeführt. Damit kann man die Laufzeit der inneren Schleife vernachlässigen, da sie für alle anderen Durchläufe einen konstanten zeitlichen Aufwand besitzt.\\
+\begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \captionof{figure}{Beispiel 1.c) der Gruppe A}
+    \includegraphics{Figures/Test_2007-11-16_1Ac}
+    \label{figure:Test_2007-11-16_1Ac}
+\end{minipage}
+\begin{minipage}[t]{0.08\textwidth}~\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \captionof{figure}{Beispiel 1.c) der Gruppe B}
+    \centering
+    \includegraphics{Figures/Test_2007-11-16_1Bc}
+    \label{figure:Test_2007-11-16_1Bc}
+\end{minipage}
 
-Die äußerste Schleife läuft von 1 bis $3n²$ und besitzt somit ein quadratischen Laufzeit. Die zweite für-Schleif läuft jeweils bis zu $\frac{j}{2}$. Das heißt die Laufzeit beträgt $\frac{1}{2},\frac{2}{2},\frac{3}{2},\frac{4}{2}\dots\frac{3n²}{2}$. Lassen wir die Konstante weg ($3n² \Rightarrow n²$) und ziehen den Term $\frac{1}{2}$ nach vorne erhalten wir $\frac{1}{2}\left(1,2,3,4\dots n²\right)$. Mit der Summenformel von Gauß ergibt sich also $\frac{1}{2}⋅(n²+1)⋅\frac{n²}{2}$ und somit insgesamt eine Laufzeit von $θ\left(n⁴\right)$ für das gesamte Codestück.
+Die äußerste Schleife läuft von 1 bis $3n²$ und besitzt somit ein
+quadratischen Laufzeit. Die zweite für-Schleif läuft jeweils bis zu
+$\frac{j}{2}$. Das heißt die Laufzeit beträgt
+$\frac{1}{2},\frac{2}{2},\frac{3}{2},\frac{4}{2}\dots\frac{3n²}{2}$. Lassen
+wir die Konstante weg ($3n² ⇒ n²$) und ziehen den Term $\frac{1}{2}$ nach
+vorne erhalten wir $\frac{1}{2}\left(1,2,3,4\dots n²\right)$. Mit der
+Summenformel von Gauß ergibt sich also $\frac{1}{2}⋅(n²+1)⋅\frac{n²}{2}$ und
+somit insgesamt eine Laufzeit von $θ\left(n⁴\right)$ für das gesamte
+Codestück.\\
 
-\begin{figure}[htbp]
-	\caption{Beispiel 1.c) der Gruppe B}
-	\vskip 0.2cm
-	\centering
-	\includegraphics{Figures/Test_2007-11-16_1Bc}
-	\label{figure:Test_2007-11-16_1Bc}
-\end{figure}
-
-Die Analyse des Codes von Abbildung~\ref{figure:Test_2007-11-16_1Bc} führt analog zu dem vorhergehenden Beispiel auf eine Laufzeit von $θ\left(n⁶\right)$.
+Die Analyse des Codes von Abbildung~\ref{figure:Test_2007-11-16_1Bc} führt
+analog zu dem vorhergehenden Beispiel auf eine Laufzeit von
+$θ\left(n⁶\right)$.
 
 \paragraph{Test vom 25.4.2008}~\\
 
-\begin{figure}[htbp]
-	\caption{Beispiel 1.c) der Gruppe A}
-	\vskip 0.2cm
-	\centering
-	\includegraphics{Figures/Test_2008-04-25_1Ac}
-	\label{figure:Test_2008-04-25_1Ac}
-\end{figure}
+Wir analysieren den in Abbildung~\ref{figure:Test_2008-04-25_1Ac}
+dargestellten Code. Die beiden inneren Schleifen sind abhängig voneinander, da
+in der äußeren Schleife $j$ auf ein Drittel verringert wird. Die innere
+Schleife läuft also $n,\frac{n}{3},\frac{n}{9},\frac{n}{27}\dots$ solange
+$j≥1$. Die Summe über diese Terme liegt zwischen n und $2n$. Die inneren
+Schleifen ergeben also einen Aufwand von $θ\left(n\right)$.
 
-Wir analysieren den in Abbildung~\ref{figure:Test_2008-04-25_1Ac} dargestellten Code. Die beiden inneren Schleifen sind abhängig voneinander, da in der äußeren Schleife $j$ auf ein Drittel verringert wird. Die innere Schleife läuft also $n,\frac{n}{3},\frac{n}{9},\frac{n}{27}\dots$ solange $j≥1$. Die Summe über diese Terme liegt zwischen n und $2n$. Die inneren Schleifen ergeben also einen Aufwand von $θ\left(n\right)$. Die äußere Schleife läuft $n²$ mal. Somit ergibt sich ein Gesamt-Aufwand von $θ\left(n³\right)$.
+\begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \captionof{figure}{Beispiel 1.c) der Gruppe A}
+    \includegraphics{Figures/Test_2008-04-25_1Ac}
+    \label{figure:Test_2008-04-25_1Ac}
+\end{minipage}
+\begin{minipage}[t]{0.08\textwidth}~\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \centering
+    \captionof{figure}{Beispiel 1.c) der Gruppe B}
+    \includegraphics{Figures/Test_2008-04-25_1Bc}
+    \label{figure:Test_2008-04-25_1Bc}
+\end{minipage}~\\
 
-\begin{figure}[htbp]
-	\caption{Beispiel 1.c) der Gruppe B}
-	\vskip 0.2cm
-	\centering
-	\includegraphics{Figures/Test_2008-04-25_1Bc}
-	\label{figure:Test_2008-04-25_1Bc}
-\end{figure}
+Die äußere Schleife läuft $n²$ mal. Somit ergibt sich ein Gesamt-Aufwand von
+$θ\left(n³\right)$.\\
 
-Nach analoger Analyse zum vorhergehenden Beispiel ergibt sich für den Code von Abbildung~\ref{figure:Test_2008-04-25_1Bc} eine Laufzeit von $θ\left(n²\right)$.
+Nach analoger Analyse zum vorhergehenden Beispiel ergibt sich für den Code von
+Abbildung~\ref{figure:Test_2008-04-25_1Bc} eine Laufzeit von
+$θ\left(n²\right)$.
 
 \paragraph{Test vom 7.11.2008}~\\
 
@@ -468,7 +575,14 @@ Nach analoger Analyse zum vorhergehenden Beispiel ergibt sich für den Code von 
 	\label{figure:Test_2008-11-07_1AcA}
 \end{figure}
 
-Der zu analysierende Code ist in Abbildung~\ref{figure:Test_2008-11-07_1AcA} dargestellt. In der äußeren Schleife wird von $a$ immer wieder $n$ abgezogen. Das können wir $n$ mal machen bis $a≤0$ ist. Die äußere Schleife hat somit eine Laufzeit in $θ\left(n\right)$. In der inneren Schleife wird von der Variable $j$, die am Anfang den Wert $log\left(n\right)$ besitzt solange 1 abgezogen bis wir auf einen Wert von 1 kommen. Dieser Schritt kann $log\left(n\right)$ mal durchgeführt werden. Insgesamt ergibt sich also eine Laufzeit von $θ\left(log\left(n\right)⋅ n\right)$
+Der zu analysierende Code ist in Abbildung~\ref{figure:Test_2008-11-07_1AcA}
+dargestellt. In der äußeren Schleife wird von $a$ immer wieder $n$ abgezogen.
+Das können wir $n$ mal machen bis $a≤0$ ist. Die äußere Schleife hat somit
+eine Laufzeit in $θ\left(n\right)$. In der inneren Schleife wird von der
+Variable $j$, die am Anfang den Wert $log\left(n\right)$ besitzt solange 1
+abgezogen bis wir auf einen Wert von 1 kommen. Dieser Schritt kann
+$log\left(n\right)$ mal durchgeführt werden. Insgesamt ergibt sich also eine
+Laufzeit von $θ\left(log\left(n\right)⋅ n\right)$
 
 \paragraph{Test vom 15.04.2011}~\\
 
@@ -480,21 +594,37 @@ Der zu analysierende Code ist in Abbildung~\ref{figure:Test_2008-11-07_1AcA} dar
 	\label{figure:Test_2011_04_15_AaB}
 \end{figure}
 
-Der in Abbildung~\ref{figure:Test_2011_04_15_AaB} gezeigte Code soll analysiert werden. Die äußerste „für”-Schleife wird n mal durchgeführt. Da die innere „so-lange”-Schleife nur beim ersten dieser n Durchgänge ausgeführt wird — a wird nachdem es den Wert n erreicht hat nicht mehr auf einen kleineren Wert gesetzt — kann die Laufzeit der inneren Schleife von $\log(n)$ vernachlässigt werden. Insgesamt ergibt sich für die erste „für”-Schleife also eine Laufzeit von $θ(n)$. Diese Tatsache kann man auch erkennen wenn man sich die einzelnen Laufzeiten der äußersten Schleife ansieht:
+Der in Abbildung~\ref{figure:Test_2011_04_15_AaB} gezeigte Code soll
+analysiert werden. Die äußerste „für”-Schleife wird n mal durchgeführt. Da die
+innere „so-lange”-Schleife nur beim ersten dieser n Durchgänge ausgeführt wird
+— a wird nachdem es den Wert n erreicht hat nicht mehr auf einen kleineren
+Wert gesetzt — kann die Laufzeit der inneren Schleife von $\log(n)$
+vernachlässigt werden. Insgesamt ergibt sich für die erste „für”-Schleife also
+eine Laufzeit von $θ(n)$. Diese Tatsache kann man auch erkennen wenn man sich
+die einzelnen Laufzeiten der äußersten Schleife ansieht:
 
 \begin{itemize}
-	\item 1. Durchgang: $θ\left(\log(\left(n\right)) \right)$
+	\item 1. Durchgang: $θ\left(\log(n) \right)$
 	\item 2. Durchgang: $θ(1)$
 	\item 3. Durchgang: $θ(1)$
-	\item \dots
+	\item …
 	\item n. Durchgang: $θ(1)$
 \end{itemize}
 
-Zusammengezählt kommen wir damit auf eine Laufzeit in Theta-Notation von \[θ\left(\log(n)+\left(n-1\right)⋅ 1\right) \equiv θ\left(n\right)\]
+Zusammengezählt kommen wir damit auf eine Laufzeit in Theta-Notation von
+\[θ\left(\log(n)+\left(n-1\right)⋅ 1\right) \equiv θ\left(n\right)\]
 
-Der Wert von b nach den ersten beiden Schleifen beträgt $2^{\log(n)}$. Dieser Wert ergibt sich dadurch, dass in der inneren Schleife b $\log(n)$ mal verdoppelt wurde. Dabei gehen wir hierbei davon aus, das es sich bei $\log(n)$ um den Zweierlogarithmus handelt. Dadurch heben sich der Logarithmus und die Zweierpotenz (Umkehrfunktion des Zweierlogarithmus) auf und der Wert von $b$ beträgt somit $n$.\\
+Der Wert von b nach den ersten beiden Schleifen beträgt $2^{\log(n)}$. Dieser
+Wert ergibt sich dadurch, dass in der inneren Schleife b $\log(n)$ mal
+verdoppelt wurde. Dabei gehen wir hierbei davon aus, das es sich bei $\log(n)$
+um den Zweierlogarithmus handelt. Dadurch heben sich der Logarithmus und die
+Zweierpotenz (Umkehrfunktion des Zweierlogarithmus) auf und der Wert von $b$
+beträgt somit $n$.\\
 
-Der neue Wert der in a gespeichert wird ist also $n²$ ($a=b^2$). Damit kommen wir für die letzte „für”-Schleife auf eine Laufzeit in Theta-Notation von $θ(n²)$. Die Gesamtlaufzeit beträgt somit: $$θ\left(n+n²\right) \equiv θ\left(n²\right)$$
+Der neue Wert der in a gespeichert wird ist also $n²$ ($a=b^2$). Damit kommen
+wir für die letzte „für”-Schleife auf eine Laufzeit in Theta-Notation von
+$θ(n²)$. Die Gesamtlaufzeit beträgt somit: $$θ\left(n+n²\right) \equiv
+θ\left(n²\right)$$
 
 \section{Sortieralgorithmen}
 
@@ -508,11 +638,20 @@ Der neue Wert der in a gespeichert wird ist also $n²$ ($a=b^2$). Damit kommen w
 	\label{figure:Test_2008-04-25_2Ab}
 \end{figure}
 
-Der in Abbildung~\ref{figure:Test_2008-04-25_2Ab} gezeigte Sortieralgorithmus wird auf ein Feld $A=\left(A[1],\dots,A[n]\right)$ angewendet. Er sortiert nicht alle Eingabefolgen korrekt. Wo liegt das Problem und wie kann man es beheben?\\
+Der in Abbildung~\ref{figure:Test_2008-04-25_2Ab} gezeigte Sortieralgorithmus
+wird auf ein Feld $A=\left(A[1],\dots,A[n]\right)$ angewendet. Er sortiert
+nicht alle Eingabefolgen korrekt. Wo liegt das Problem und wie kann man es
+beheben?\\
 
-Es ist möglich, dass der Algorithmus nicht terminiert. Eine Folge die z.B. zu einer Endlosschleife führt ist [1,1]. Hier werden als erstes die beiden Elemente vertauscht da $1≥1$ ist und dann die Variable \texttt{vertauscht} auf wahr gesetzt. Somit wird die wiederhole-Schleife wieder ausgeführt. In dieser werden wieder die beiden Elemente vertauscht und \texttt{vertauscht} auf wahr gesetzt\dots\\
+Es ist möglich, dass der Algorithmus nicht terminiert. Eine Folge die z.B. zu
+einer Endlosschleife führt ist [1,1]. Hier werden als erstes die beiden
+Elemente vertauscht da $1≥1$ ist und dann die Variable \texttt{vertauscht} auf
+wahr gesetzt. Somit wird die wiederhole-Schleife wieder ausgeführt. In dieser
+werden wieder die beiden Elemente vertauscht und \texttt{vertauscht} auf wahr
+gesetzt\dots\\
 
-Damit der Algorithmus terminiert muss „$A[i+1]≥ A[i]$” durch „$A[i+1] > A[i]$” ersetzt werden.
+Damit der Algorithmus terminiert muss „$A[i+1] ≥ A[i]$” durch „$A[i+1] >
+A[i]$” ersetzt werden.
 
 \section{Hashverfahren}
 
@@ -528,7 +667,8 @@ Damit der Algorithmus terminiert muss „$A[i+1]≥ A[i]$” durch „$A[i+1] > 
 
 \paragraph{Angabe}
 
-Die Angabe zum Beispiel ist in Abbildung~\ref{figure:Test_2010-01-14_1Ba} zu sehen.
+Die Angabe zum Beispiel ist in Abbildung~\ref{figure:Test_2010-01-14_1Ba} zu
+sehen.
 
 \paragraph{Lösung}
 
@@ -593,9 +733,12 @@ Die Angabe zum Beispiel ist in Abbildung~\ref{figure:Test_2010-01-14_1Ba} zu seh
 		= 0
 \end{align*}
 
-10 wird an Stelle 0 gegeben während 8 an die ursprüngliche Stelle von 10 wandert, also an Stelle 4 eingesetzt wird.\\
+10 wird an Stelle 0 gegeben während 8 an die ursprüngliche Stelle von 10
+wandert, also an Stelle 4 eingesetzt wird.\\
 
-Die Hashfunktionen sind keine gute Wahl, da bei $h₂\left(k\right)$ eine Schrittweite von 0 möglich ist, weiters belegt $h₁\left(k\right)$ niemals Platz 0 und 6.
+Die Hashfunktionen sind keine gute Wahl, da bei $h₂\left(k\right)$ eine
+Schrittweite von 0 möglich ist, weiters belegt $h₁\left(k\right)$ niemals
+Platz 0 und 6.
 
 \section{Graphen}
 
@@ -611,7 +754,11 @@ Die Hashfunktionen sind keine gute Wahl, da bei $h₂\left(k\right)$ eine Schrit
 
 \paragraph{a)}
 
-Wir wenden schrittweise den in Abbildung~\ref{figure:Test_2011-01-14_3A}  dargestellten Algorithmus auf den Graphen der ebenfalls in Abbildung~\ref{figure:Test_2011-01-14_3A} zu sehen ist an und geben jeweils den Zustand des Graphen und des „previous”-Arrays nach einem Durchlauf von $FUNKTION1(v_4)$ an.
+Wir wenden schrittweise den in Abbildung~\ref{figure:Test_2011-01-14_3A}
+dargestellten Algorithmus auf den Graphen der ebenfalls in
+Abbildung~\ref{figure:Test_2011-01-14_3A} zu sehen ist an und geben jeweils
+den Zustand des Graphen und des „previous”-Arrays nach einem Durchlauf von
+$FUNKTION1(v_4)$ an.
 
 \subparagraph{1. Schritt}
 
@@ -623,9 +770,15 @@ Wir wenden schrittweise den in Abbildung~\ref{figure:Test_2011-01-14_3A}  darges
 	\end{tabular}
 \end{center}
 
-Wir setzen als erstes alle Vorgänger auf den Wert „NULL”. Dann beginnen wir mit der Ausführung von $FUNKTION1(v4)$ die als erstes den Vorgänger von $v4$ auf sich selbst setzt und dann $v4$ in den Stack gibt. Danach wird $v4$ aus dem Stack entnommen und all Nachbarknoten von $v4$ der Reihenfolge nach betrachtet.\\
+Wir setzen als erstes alle Vorgänger auf den Wert „NULL”. Dann beginnen wir
+mit der Ausführung von $FUNKTION1(v4)$ die als erstes den Vorgänger von $v4$
+auf sich selbst setzt und dann $v4$ in den Stack gibt. Danach wird $v4$ aus
+dem Stack entnommen und all Nachbarknoten von $v4$ der Reihenfolge nach
+betrachtet.\\
 
-Der Vorgänger vom ersten Nachbar $v1$ und vom zweiten Nachbar $v3$ werden auf $v4$ gesetzt. Weiters werden $v1$ und $v3$ der Reihe nach in den Stack $S$ gegeben.\\
+Der Vorgänger vom ersten Nachbar $v1$ und vom zweiten Nachbar $v3$ werden auf
+$v4$ gesetzt. Weiters werden $v1$ und $v3$ der Reihe nach in den Stack $S$
+gegeben.\\
 
 \begin{minipage}[b]{0.7\linewidth}
 	\begin{center}
@@ -647,7 +800,12 @@ Der Vorgänger vom ersten Nachbar $v1$ und vom zweiten Nachbar $v3$ werden auf $
 	\end{tabular}
 \end{minipage}\\
 
-Danach wird $v3$ (=$k$) aus dem Stack entnommen und seine Nachbarn betrachtet. Da der Vorgänger von $v3$ schon vorher auf $v4$ (=$previous[k]$) gesetzt wurde und somit nicht $v1$ (=$w$) entspricht wird die Kante $(v3,v1)$ aus dem Graphen entfernt und die Funktion retourniert den Wert „true”. Damit ergibt sich nach dem ersten Aufruf von $FUNKTION1(v4)$ folgender Zustand von „previous”:
+Danach wird $v3$ (=$k$) aus dem Stack entnommen und seine Nachbarn betrachtet.
+Da der Vorgänger von $v3$ schon vorher auf $v4$ (=$previous[k]$) gesetzt wurde
+und somit nicht $v1$ (=$w$) entspricht wird die Kante $(v3,v1)$ aus dem
+Graphen entfernt und die Funktion retourniert den Wert „true”. Damit ergibt
+sich nach dem ersten Aufruf von $FUNKTION1(v4)$ folgender Zustand von
+„previous”:
 
 \begin{center}
 	\begin{tabular}{lccccc}
@@ -657,7 +815,8 @@ Danach wird $v3$ (=$k$) aus dem Stack entnommen und seine Nachbarn betrachtet. D
 	\end{tabular}
 \end{center}
 
-Wir erhalten den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step1} dargestellten Graphen.
+Wir erhalten den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step1}
+dargestellten Graphen.
 
 \begin{figure}[htbp]
 	\caption{Graph nach der ersten Anwendung von $FUNKTION1(v4)$}
@@ -669,17 +828,20 @@ Wir erhalten den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step1} dargestellte
 
 \subparagraph{2. Schritt}~\\
 
-Nach einer weiteren Anwendung von $FUNKTION1(v4)$ kommen wir auf folgenden Zustand von „previous”:
+Nach einer weiteren Anwendung von $FUNKTION1(v4)$ kommen wir auf folgenden
+Zustand von „previous”:
 
 \begin{center}
 	\begin{tabular}{lccccc}
 					& v1	& v2	& v3 & v4	& v5\\
 		\hline
-		previous[v] & v4	& v3	& v4	& v4 & v3 \\
+		previous[v] & v4	& v3	& v4	& v4 & v3\\
 	\end{tabular}
 \end{center}
 
-Da es sich beim Vorgänger von $v5$ nicht um $v2$ handelt wird die Kante $(v5,v2)$ gelöscht und es ergibt sich der in Abbildung~\ref{figure:Test_2011-01-14-3A_Step2} dargestellte Graph.
+Da es sich beim Vorgänger von $v5$ nicht um $v2$ handelt wird die Kante
+$(v5,v2)$ gelöscht und es ergibt sich der in
+Abbildung~\ref{figure:Test_2011-01-14-3A_Step2} dargestellte Graph.
 
 \begin{figure}[htbp]
 	\caption{Graph nach der zweiten Anwendung von $FUNKTION1(v4)$}
@@ -697,11 +859,13 @@ Nach dem dritten Schritt ergibt sich folgendes „previous”-Array:
 	\begin{tabular}{lccccc}
 					& v1	& v2	& v3	& v4	& v5\\
 		\hline
-		previous[v] & v4	& v3	& v4	& v4	& v3\\
+		previous[v] & v4	& v3	& v4	& v4	& v3
 	\end{tabular}
 \end{center}
 
-Nachdem der Vorgänger von $v2$ nicht $v1$ ist wird die Kante $(v2,v1)$ gelöscht und es ergibt sich der Graph von Abbildung~\ref{figure:Test_2011-01-14-3A_Step3}.
+Nachdem der Vorgänger von $v2$ nicht $v1$ ist wird die Kante $(v2,v1)$
+gelöscht und es ergibt sich der Graph von
+Abbildung~\ref{figure:Test_2011-01-14-3A_Step3}.
 
 \begin{figure}[htbp]
 	\caption{Graph nach der dritten Anwendung von $FUNKTION1(v4)$}
@@ -713,28 +877,55 @@ Nachdem der Vorgänger von $v2$ nicht $v1$ ist wird die Kante $(v2,v1)$ gelösch
 
 \subparagraph{4. Schritt}~\\
 
-Nach dem 4. Schritt erhalten wir sowohl das gleiche „previous”-Array als auch den gleichen Graphen wie im vorigen Schritt. Diesmal wird von der Funktion allerdings „false” zurückgegeben und der Algorithmus terminiert. Bei $G₂$ handelt es sich also um den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step3} dargestellten Graphen.
+Nach dem 4. Schritt erhalten wir sowohl das gleiche „previous”-Array als auch
+den gleichen Graphen wie im vorigen Schritt. Diesmal wird von der Funktion
+allerdings „false” zurückgegeben und der Algorithmus terminiert. Bei $G₂$
+handelt es sich also um den in Abbildung~\ref{figure:Test_2011-01-14-3A_Step3}
+dargestellten Graphen.
 
 \paragraph{b)}
 
 \begin{itemize}
-	\item Der Algorithmus beruht auf dem Tiefensuche-Prinzip (Aus dem Stack wird immer der Knoten der als letztes reingegeben wurde als erstes wieder entnommen und betrachtet).
-	\item „WasBinIch” entfernt die Kreise eines Graphen und bildet somit — bei einem zusammenhängenden Graphen — einen (Spann)-Baum.
+
+    \item Der Algorithmus beruht auf dem Tiefensuche-Prinzip (Aus dem Stack
+    wird immer der Knoten der als letztes reingegeben wurde als erstes wieder
+    entnommen und betrachtet).
+
+    \item „WasBinIch” entfernt die Kreise eines Graphen und bildet somit — bei
+    einem zusammenhängenden Graphen — einen (Spann)-Baum.
+
 \end{itemize}
 
 \paragraph{c)}
 
 \begin{itemize}
-	\item Die Worst-Case Laufzeit beträgt bei einem vollständigen Graphen $θ\left(|V³|\right)$, da der Graph $θ\left(|V|²\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
-	\item Die \textbf{Worst}-Case Laufzeit beträgt bei einem dünnen Graphen $θ\left(|V²|\right)$, da der Graph $θ\left(|V|\right)$ Kanten besitzt die Theta $θ\left(|V|\right)$ mal durchgegangen werden~\cite{Juggl3r_Beispiel3}.
-	\item Bei dem Algorithmus handelt es sich um ein iteratives Programm.
+
+	\item Die Worst-Case Laufzeit beträgt bei einem vollständigen Graphen
+    $θ\left(|V³|\right)$, da der Graph $θ\left(|V|²\right)$ Kanten besitzt die
+    Theta $θ\left(|V|\right)$ mal durchgegangen
+    werden~\cite{Juggl3r_Beispiel3}.
+
+    \item Die Worst-Case Laufzeit beträgt bei einem dünnen Graphen
+    $θ\left(|V²|\right)$, da der Graph $θ\left(|V|\right)$ Kanten besitzt die
+    Theta $θ\left(|V|\right)$ mal durchgegangen
+    werden~\cite{Juggl3r_Beispiel3}.
+
+    \item Bei dem Algorithmus handelt es sich um ein iteratives Programm.
+
 \end{itemize}
 
 \section{Beispiel für dynamische Programmierung}
 
 \subsection{Angabe}
 
-Mit $40^{\circ}C$ im Schatten hat sich der Sommer gerade eingestellt. Da dir heiß ist, möchtest du die hohe Temperatur mit dem Verzehr eines großen Eises für dich etwas erträglicher gestalten. Als Student verfügst du nur über ein begrenztes Einkommen und beschließt daher maximal sieben Euro auszugeben. Die Eisreserven sind gerade knapp und deswegen darfst von jeder Sorte nur eine Kugel nehmen. Um zu bestimmen welche Sorten die bestmögliche Kombination unter den gegebenen Bedingungen darstellen, beschließt du dynamische Programmierung zu verwenden.
+Mit $40℃$ im Schatten hat sich der Sommer gerade eingestellt. Da dir
+heiß ist, möchtest du die hohe Temperatur mit dem Verzehr eines großen Eises
+für dich etwas erträglicher gestalten. Als Student verfügst du nur über ein
+begrenztes Einkommen und beschließt daher maximal sieben Euro auszugeben. Die
+Eisreserven sind gerade knapp und deswegen darfst von jeder Sorte nur eine
+Kugel nehmen. Um zu bestimmen welche Sorten die bestmögliche Kombination unter
+den gegebenen Bedingungen darstellen, beschließt du dynamische Programmierung
+zu verwenden.
 
 \begin{table}[H]
 	\begin{center}
@@ -755,12 +946,18 @@ Mit $40^{\circ}C$ im Schatten hat sich der Sommer gerade eingestellt. Da dir hei
 
 \subsection{Erstellen der Matrix}
 
-Als erstes erstellen wir eine Tabelle mit den nötigen Einträgen. Da wir die Wahl zwischen sechs verschiedenen Sorten haben, sollte unsere Matrix eigentlich sieben Zeilen besitzen (eine zusätzliche Zeile für die Wahl keiner einzigen Sorte). Die Sorte Kaviar überschreitet allerdings unsere bescheidenen Mittel von sieben Euro. Deshalb brauchen wir diese nicht zu beachten und somit können wir auf die Zeile für diese Sorte komplett verzichten. Somit erstellen wir eine Tabelle mit insgesamt 6 Zeilen (Tabelle \ref{table:Leer}).
+Als erstes erstellen wir eine Tabelle mit den nötigen Einträgen. Da wir die
+Wahl zwischen sechs verschiedenen Sorten haben, sollte unsere Matrix
+eigentlich sieben Zeilen besitzen (eine zusätzliche Zeile für die Wahl keiner
+einzigen Sorte). Die Sorte Kaviar überschreitet allerdings unsere bescheidenen
+Mittel von sieben Euro. Deshalb brauchen wir diese nicht zu beachten und somit
+können wir auf die Zeile für diese Sorte komplett verzichten. Somit erstellen
+wir eine Tabelle mit insgesamt 6 Zeilen (Tabelle \ref{table:Leer}).
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			&	&	&	&	&	&	&	&\\
@@ -775,14 +972,24 @@ Als erstes erstellen wir eine Tabelle mit den nötigen Einträgen. Da wir die Wa
 \label{table:Leer}
 \end{table}
 
-Wie wir sehen stehen die Spalten für die Kosten (Gewicht) des Eis und die Zeilen für die verschiedenen Eissorten (Gegenstände). In den Zellen der Tabelle tragen wir den Genussfaktor (Wert) ein.
+Wie wir sehen stehen die Spalten für die Kosten (Gewicht) des Eis und die
+Zeilen für die verschiedenen Eissorten (Gegenstände). In den Zellen der
+Tabelle tragen wir den Genussfaktor (Wert) ein.
 
 \begin{leftbar}
 	\textbf{Anmerkung:}\\
 
-	Üblicherweise werden in der LVA „Algorithmen und Datenstrukturen 1”, Koffer oder Rucksäcke so gepackt, dass ein bestimmtes Gewicht nicht überschritten wird und sich gleichzeitig ein möglichst hoher Spaßfaktor ergibt.\\
+	Üblicherweise werden in der LVA „Algorithmen und Datenstrukturen 1”,
+    Koffer oder Rucksäcke so gepackt, dass ein bestimmtes Gewicht nicht
+    überschritten wird und sich gleichzeitig ein möglichst hoher Spaßfaktor
+    ergibt.\\
 
-	In diesem Zusammenhang wird der Wert der maximiert werden soll auch manchmal als Kosten oder „c” bezeichnet. In diesem Musterbeispiel stellen die Kosten des Eises allerdings das eigentliche Gewicht „w”, also die Randbedingung die nicht überschritten werden soll dar. Dahingegen wird die Variable die maximiert werden soll hier als Genussfaktor bezeichnet, sie stellt also laut LVA-Regelung das eigentliche „c” dar.\\
+	In diesem Zusammenhang wird der Wert der maximiert werden soll auch
+    manchmal als Kosten oder „c” bezeichnet. In diesem Musterbeispiel stellen
+    die Kosten des Eises allerdings das eigentliche Gewicht „w”, also die
+    Randbedingung die nicht überschritten werden soll dar. Dahingegen wird die
+    Variable die maximiert werden soll hier als Genussfaktor bezeichnet, sie
+    stellt also laut LVA-Regelung das eigentliche „c” dar.\\
 
 	Ich hoffe mal diese Erläuterung verwirrt nicht mehr als sie hilft.\\
 
@@ -791,12 +998,18 @@ Wie wir sehen stehen die Spalten für die Kosten (Gewicht) des Eis und die Zeile
 	c\dots Genussfaktor
 \end{leftbar}
 
-Es ist leicht feststellbar, dass wenn wir keine einzige Sorte Eis auswählen wir davon auch keinen Nutzen haben. Somit können wir die erste Spalte mit lauter Nullen füllen. Da es leider kein „Gratis-Eis” gibt können wir auch keine Sorte wählen ohne zumindest etwas zu zahlen. Daraus resultiert, dass auch die Spalte mit Kosten Null mit lauter Nullen gefüllt werden muss. Insgesamt ergibt sich also das in Tabelle \ref{table:Initialisierung} dargestellte Bild.
+Es ist leicht feststellbar, dass wenn wir keine einzige Sorte Eis auswählen
+wir davon auch keinen Nutzen haben. Somit können wir die erste Spalte mit
+lauter Nullen füllen. Da es leider kein „Gratis-Eis” gibt können wir auch
+keine Sorte wählen ohne zumindest etwas zu zahlen. Daraus resultiert, dass
+auch die Spalte mit Kosten Null mit lauter Nullen gefüllt werden muss.
+Insgesamt ergibt sich also das in Tabelle \ref{table:Initialisierung}
+dargestellte Bild.
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
@@ -811,12 +1024,15 @@ Es ist leicht feststellbar, dass wenn wir keine einzige Sorte Eis auswählen wir
 \label{table:Initialisierung}
 \end{table}
 
-Nach diesem Schritt könne wir endlich anfangen die erste Eissorte zu betrachten. „Creme de la Creme” besitzt einen Genussfaktor von 10 und Kosten von 3. Wir tragen also in der ersten Zeile bei Kosten 3 einen Genussfaktor von 10 ein (Tabelle \ref{table:1_Eis}).
+Nach diesem Schritt könne wir endlich anfangen die erste Eissorte zu
+betrachten. „Creme de la Creme” besitzt einen Genussfaktor von 10 und Kosten
+von 3. Wir tragen also in der ersten Zeile bei Kosten 3 einen Genussfaktor von
+10 ein (Tabelle \ref{table:1_Eis}).
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			& 0 & 0 & 0 & 0	 & 0	& 0 & 0 & 0 \\
@@ -831,16 +1047,25 @@ Nach diesem Schritt könne wir endlich anfangen die erste Eissorte zu betrachten
 \label{table:1_Eis}
 \end{table}
 
-Nun sehen wir uns die Eissorte „Brokkoli” an, die nur einen geringen Genussfaktor von 3 besitzt, dafür aber auch nur einen Euro kostet. Da in der Spalte mit Kosten 1 in der vorhergehenden Zeile noch kein Wert steht, können wir in diese Spalte den Genussfaktor dieses Eises eintragen.\\
+Nun sehen wir uns die Eissorte „Brokkoli” an, die nur einen geringen
+Genussfaktor von 3 besitzt, dafür aber auch nur einen Euro kostet. Da in der
+Spalte mit Kosten 1 in der vorhergehenden Zeile noch kein Wert steht, können
+wir in diese Spalte den Genussfaktor dieses Eises eintragen.\\
 
-Von der vorhergehenden Zeile sehen wir, dass wir schon die Möglichkeit besitzen ein Eis zu wählen das die Kosten 3 und Genussfaktor 10 besitzt. Dieses können wir natürlich weiterhin auswählen. Deshalb übertragen wir den Wert von der oberen Zeile in Spalte 3.\\
+Von der vorhergehenden Zeile sehen wir, dass wir schon die Möglichkeit
+besitzen ein Eis zu wählen das die Kosten 3 und Genussfaktor 10 besitzt.
+Dieses können wir natürlich weiterhin auswählen. Deshalb übertragen wir den
+Wert von der oberen Zeile in Spalte 3.\\
 
-Weiters können wir jetzt die Eissorte von vorher nehmen und mit der aktuellen Sorte, Brokkoli kombinieren. Insgesamt ergeben sich dadurch Kosten von 4 und ein Genusswert von 13 den wir in die aktuelle Zeile eintragen. Nach diesen Überlegungen erhalten wir die in Tabelle \ref{table:2_Eis} dargestellte Matrix.
+Weiters können wir jetzt die Eissorte von vorher nehmen und mit der aktuellen
+Sorte, Brokkoli kombinieren. Insgesamt ergeben sich dadurch Kosten von 4 und
+ein Genusswert von 13 den wir in die aktuelle Zeile eintragen. Nach diesen
+Überlegungen erhalten wir die in Tabelle \ref{table:2_Eis} dargestellte Matrix.
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			& 0 & 0 & 0 & 0	 &	0 & 0	& 0 & 0 \\
@@ -855,18 +1080,32 @@ Weiters können wir jetzt die Eissorte von vorher nehmen und mit der aktuellen S
 \label{table:2_Eis}
 \end{table}
 
-Die Geschmackssorte Vanille besitzt einen Genussfaktor von 7 bei Kosten von 2 Euro. Da bei der Spalte mit Kosten 2 noch kein Wert eingetragen ist schreiben wir dort den Genussfaktor von der aktuellen Eissorte Vanille an.\\
+Die Geschmackssorte Vanille besitzt einen Genussfaktor von 7 bei Kosten von 2
+Euro. Da bei der Spalte mit Kosten 2 noch kein Wert eingetragen ist schreiben
+wir dort den Genussfaktor von der aktuellen Eissorte Vanille an.\\
 
-Jetzt betrachten wir wieder die Zeile davor um zu sehen welche weiteren Kombinationen möglich sind. Wenn wir Vanille-Eis und den ersten Wert in der oberen Zeile wählen kommen wir auf Kosten von 3 und einen Genussfaktor von 10. Dieser Wert entspricht dem von der vorhergehenden Zeile. Wir haben also eine Kombination gefunden die gleich gut wie die vorhergehende war. Im Endeffekt bleibt der Wert in der Spalte 3 also der Selbe.\\
+Jetzt betrachten wir wieder die Zeile davor um zu sehen welche weiteren
+Kombinationen möglich sind. Wenn wir Vanille-Eis und den ersten Wert in der
+oberen Zeile wählen kommen wir auf Kosten von 3 und einen Genussfaktor von 10.
+Dieser Wert entspricht dem von der vorhergehenden Zeile. Wir haben also eine
+Kombination gefunden die gleich gut wie die vorhergehende war. Im Endeffekt
+bleibt der Wert in der Spalte 3 also der Selbe.\\
 
-In Spalte 3 der vorhergehenden Zeile befindet sich der Genussfaktor 10. Zusammen mit der aktuellen Sorte ergibt sich ein Genussfaktor von 17 bei Kosten von 5 Euro. Da sich in der Spalte 5 noch kein Wert befindet tragen wir diesen Genussfaktor also dort ein.\\
+In Spalte 3 der vorhergehenden Zeile befindet sich der Genussfaktor 10.
+Zusammen mit der aktuellen Sorte ergibt sich ein Genussfaktor von 17 bei
+Kosten von 5 Euro. Da sich in der Spalte 5 noch kein Wert befindet tragen wir
+diesen Genussfaktor also dort ein.\\
 
-Zum Schluss betrachten wir noch den Genussfaktor von 13 bei Kosten von 4. Zusammen mit der aktuellen Eissorte ergibt sich ein Genussfaktor von 20 bei Kosten von 6. Wir tragen also diesen Wert ein. Die anderen Werte werden von oben übernommen, da wir noch keine besseren Kombinationen für die Kosten von 1 und 4 gefunden haben (Tabelle \ref{table:3_Eis}).
+Zum Schluss betrachten wir noch den Genussfaktor von 13 bei Kosten von 4.
+Zusammen mit der aktuellen Eissorte ergibt sich ein Genussfaktor von 20 bei
+Kosten von 6. Wir tragen also diesen Wert ein. Die anderen Werte werden von
+oben übernommen, da wir noch keine besseren Kombinationen für die Kosten von 1
+und 4 gefunden haben (Tabelle \ref{table:3_Eis}).
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			& 0 & 0 & 0 & 0	 &	0 &	 0 & 0 & 0	\\
@@ -881,26 +1120,44 @@ Zum Schluss betrachten wir noch den Genussfaktor von 13 bei Kosten von 4. Zusamm
 \label{table:3_Eis}
 \end{table}
 
-„Málaga” besitzt einen Genussfaktor von 8 bei Kosten von 2 Euro. Da der Genusswert höher als der bisher gefundene von 7 ist schreiben wir diesen in die dafür vorgesehene Spalte.\\
+„Málaga” besitzt einen Genussfaktor von 8 bei Kosten von 2 Euro. Da der
+Genusswert höher als der bisher gefundene von 7 ist schreiben wir diesen in
+die dafür vorgesehene Spalte.\\
 
-Bei den Kosten von 1 übernehmen wir wieder den Wert von oben, da mit der aktuellen Eissorte natürlich keine Kombination möglich ist die Kosten von 1 aufweist.\\
+Bei den Kosten von 1 übernehmen wir wieder den Wert von oben, da mit der
+aktuellen Eissorte natürlich keine Kombination möglich ist die Kosten von 1
+aufweist.\\
 
-Weiters tragen wir in Spalte 3 einen Genusswert von 11 ein, der sich aus dem Genusswert 3 aus der ersten Spalte der letzten Zeile und dem Genusswert von Málaga ergibt.\\
+Weiters tragen wir in Spalte 3 einen Genusswert von 11 ein, der sich aus dem
+Genusswert 3 aus der ersten Spalte der letzten Zeile und dem Genusswert von
+Málaga ergibt.\\
 
-Wir betrachten den nächsten Wert von 7 bei Kosten von 2 aus der vorhergehenden Zeile. Eine Kombination mit Málaga gibt einen Genussfaktor von 15 bei Kosten von 4. Dieser Wert ist höher als der Vorhergehende in Spalte 4 und wird deshalb dort eingetragen.\\
+Wir betrachten den nächsten Wert von 7 bei Kosten von 2 aus der vorhergehenden
+Zeile. Eine Kombination mit Málaga gibt einen Genussfaktor von 15 bei Kosten
+von 4. Dieser Wert ist höher als der Vorhergehende in Spalte 4 und wird
+deshalb dort eingetragen.\\
 
-Der nächste Genussfaktor aus der vorhergehenden Zeile ist 10. Gemeinsam mit der aktuellen Sorte kommt man also auf einen Genussfaktor von 18 bei einem Gewicht von fünf. Dieser wird da er größer als 17 ist, in die fünfte Spalte eingetragen.\\
+Der nächste Genussfaktor aus der vorhergehenden Zeile ist 10. Gemeinsam mit
+der aktuellen Sorte kommt man also auf einen Genussfaktor von 18 bei einem
+Gewicht von fünf. Dieser wird da er größer als 17 ist, in die fünfte Spalte
+eingetragen.\\
 
-13, der nächste Genusswert, ergibt zusammen mit dem aktuellen Eis einen Wert von 21 und wird deshalb in Spalte 6 (=4+2) eingetragen.\\
+13, der nächste Genusswert, ergibt zusammen mit dem aktuellen Eis einen Wert
+von 21 und wird deshalb in Spalte 6 (=4+2) eingetragen.\\
 
-Genussfaktor 17 kombiniert mit dem Genussfaktor von Málaga-Eis ergibt den Wert von 25 der auf Grund der Kosten von 7 Euro in die korrespondierende Spalte geschrieben wird.\\
+Genussfaktor 17 kombiniert mit dem Genussfaktor von Málaga-Eis ergibt den Wert
+von 25 der auf Grund der Kosten von 7 Euro in die korrespondierende Spalte
+geschrieben wird.\\
 
-Da der letzte Wert aus der vorhergehenden Zeile schon Kosten von 6 besitzt und diese zusammen mit den Kosten des aktuellen Eises über die festgesetzten Maximalkosten von 7 Euro hinausgeht brauchen wir diesen nicht mehr zu betrachten und kommen schließlich auf Tabelle \ref{table:4_Eis}.
+Da der letzte Wert aus der vorhergehenden Zeile schon Kosten von 6 besitzt und
+diese zusammen mit den Kosten des aktuellen Eises über die festgesetzten
+Maximalkosten von 7 Euro hinausgeht brauchen wir diesen nicht mehr zu
+betrachten und kommen schließlich auf Tabelle \ref{table:4_Eis}.
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			& 0 & 0 & 0 & 0	 &	0 &	 0 & 0 & 0	 \\
@@ -915,12 +1172,14 @@ Da der letzte Wert aus der vorhergehenden Zeile schon Kosten von 6 besitzt und d
 \label{table:4_Eis}
 \end{table}
 
-Nach der gleichen Vorgehensweise wie in den Schritten zuvor kommen wir, nachdem wir auch die letzte Eissorte betrachtet haben auf die in Tabelle \ref{table:5_Eis} dargestellte Matrix.
+Nach der gleichen Vorgehensweise wie in den Schritten zuvor kommen wir,
+nachdem wir auch die letzte Eissorte betrachtet haben auf die in Tabelle
+\ref{table:5_Eis} dargestellte Matrix.
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{l|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 				6 & 7\\
 			\hline
 			Keine Sorte			& \textcolor{orange}{0} & 0 & 0 & 0	& 0 & 0 &
@@ -943,17 +1202,39 @@ Nach der gleichen Vorgehensweise wie in den Schritten zuvor kommen wir, nachdem 
 
 \subsection{Rückverfolgung}
 
-Wenn wir die letzte Zeile von Tabelle \ref{table:5_Eis} betrachten, sehen wir das wir einen maximalen Genussfaktor von 25 erhalten. Um nun zurückzurechnen welche Auswahl uns zu diesem Wert geführt haben gehen wir die Tabelle rückwärts durch.\\
+Wenn wir die letzte Zeile von Tabelle \ref{table:5_Eis} betrachten, sehen wir
+das wir einen maximalen Genussfaktor von 25 erhalten. Um nun zurückzurechnen
+welche Auswahl uns zu diesem Wert geführt haben gehen wir die Tabelle
+rückwärts durch.\\
 
-Wir starten bei Wert 25 in der letzten Zeile. Da es sich beim Genussfaktor in der darüberliegenden Zeile in derselben Spalte um den gleichen Wert handelt schließen wir daraus, dass wir die Sorte Schokolade nicht ausgewählt haben.\\
+Wir starten bei Wert 25 in der letzten Zeile. Da es sich beim Genussfaktor in
+der darüberliegenden Zeile in derselben Spalte um den gleichen Wert handelt
+schließen wir daraus, dass wir die Sorte Schokolade nicht ausgewählt haben.\\
 
-Wenn wir nach dem ersten Vorkommen des Wertes 25 in der Spalte mit Kosten 7 suchen landen wir in der vorletzten Zeile und sehen, dass die Sorte \emph{Málaga} ausgewählt wurde. Wir ziehen also vom gesamten Genussfaktor den Genussfaktor dieser Sorte ab. Somit kommen wir auf einen Wert von 17. Diesen Wert müssen wir in der Spalte 5 suchen, da von den Gesamtkosten von 7 die Kosten des Málaga-Eises von 2 abgezogen werden.\\
+Wenn wir nach dem ersten Vorkommen des Wertes 25 in der Spalte mit Kosten 7
+suchen landen wir in der vorletzten Zeile und sehen, dass die Sorte
+\emph{Málaga} ausgewählt wurde. Wir ziehen also vom gesamten Genussfaktor den
+Genussfaktor dieser Sorte ab. Somit kommen wir auf einen Wert von 17. Diesen
+Wert müssen wir in der Spalte 5 suchen, da von den Gesamtkosten von 7 die
+Kosten des Málaga-Eises von 2 abgezogen werden.\\
 
-Wir suchen die Tabellenzeilen in Spalte 5 nach dem ersten Auftreten des Genussfaktor 17 ab und werden in der Zeile mit der Sorte \emph{Vanille} fündig. Wir haben also auch diese Eissorte ausgewählt. Wiederum ziehen wir den Genussfaktor dieses Eises vom dem übrig gebliebenen Genussfaktor 17 ab und bekommen den Wert 10. Als neue Kosten erhalten wir den Wert 3 (=5-2).\\
+Wir suchen die Tabellenzeilen in Spalte 5 nach dem ersten Auftreten des
+Genussfaktor 17 ab und werden in der Zeile mit der Sorte \emph{Vanille}
+fündig. Wir haben also auch diese Eissorte ausgewählt. Wiederum ziehen wir den
+Genussfaktor dieses Eises vom dem übrig gebliebenen Genussfaktor 17 ab und
+bekommen den Wert 10. Als neue Kosten erhalten wir den Wert 3 (=5-2).\\
 
-Der Genussfaktor von 10 tritt erstmals in der Zeile der Eissorte \emph{„Creme de la Creme”} auf, die also auch gewählt wurde. Da diese Sorte einen Genussfaktor von 10 besitzt ergibt sich bei weiterer Subtraktion vom vorher übrig gebliebenen Genussfaktor ein Wert von Null. Es wurde also keine weitere Sorte gewählt.\\
+Der Genussfaktor von 10 tritt erstmals in der Zeile der Eissorte \emph{„Creme
+de la Creme”} auf, die also auch gewählt wurde. Da diese Sorte einen
+Genussfaktor von 10 besitzt ergibt sich bei weiterer Subtraktion vom vorher
+übrig gebliebenen Genussfaktor ein Wert von Null. Es wurde also keine weitere
+Sorte gewählt.\\
 
-Eine Plausibilitätsüberprüfung der gesamten Werte ist in Gleichung \ref{equation:Kosten} und \ref{equation:Wert} zu sehen. Sie ergibt die erwarteten Werte und lässt so zumindest darauf hoffen, dass wir die optimale Lösung, unter der gegebenen Einschränkung nicht mehr als sieben Euro auszugeben, gefunden haben.
+Eine Plausibilitätsüberprüfung der gesamten Werte ist in Gleichung
+\ref{equation:Kosten} und \ref{equation:Wert} zu sehen. Sie ergibt die
+erwarteten Werte und lässt so zumindest darauf hoffen, dass wir die optimale
+Lösung, unter der gegebenen Einschränkung nicht mehr als sieben Euro
+auszugeben, gefunden haben.
 
 \begin{equation}
 	\label{equation:Kosten}
@@ -969,16 +1250,24 @@ Eine Plausibilitätsüberprüfung der gesamten Werte ist in Gleichung \ref{equat
 
 \subsection{Vollständiges Ausfüllen der Tabelle}
 
-Tabelle \ref{table:5_Eis} stellt alle möglichen Lösungen eigentlich schon dar und sollte auch beim Test durchaus als richtig gewertet werden. Um eine meiner Meinung nach nur verwirrendere „vollständige” Darstellung nach der gegebenen Formel zu erhalten muss man die vorhergehende Tabelle noch leicht verändern.\\
+Tabelle \ref{table:5_Eis} stellt alle möglichen Lösungen eigentlich schon dar
+und sollte auch beim Test durchaus als richtig gewertet werden. Um eine meiner
+Meinung nach nur verwirrendere „vollständige” Darstellung nach der gegebenen
+Formel zu erhalten muss man die vorhergehende Tabelle noch leicht verändern.\\
 
-So sind die fehlenden Werte jeweils durch den größtmöglichen Wert den sich durch die vorhergehende Zeile oder Spalte ergeben zu ersetzen. Auch schon ausgefüllte Werte müssen durch eventuell auftretende größere Werte, die sich in vorhergehenden Zeilen oder Spalten ergeben haben können, ersetzt werden.\\
+So sind die fehlenden Werte jeweils durch den größtmöglichen Wert den sich
+durch die vorhergehende Zeile oder Spalte ergeben zu ersetzen. Auch schon
+ausgefüllte Werte müssen durch eventuell auftretende größere Werte, die sich
+in vorhergehenden Zeilen oder Spalten ergeben haben können, ersetzt werden.\\
 
-Die „vollständige” Matrix für das vorhergehende Beispiel wird in Tabelle \ref{table:Vollstaendig} gezeigt. Zu beachten ist, dass diese Matrix wie leicht nachzuvollziehen ist auch „nicht sinnvolle” Werte enthält.
+Die „vollständige” Matrix für das vorhergehende Beispiel wird in Tabelle
+\ref{table:Vollstaendig} gezeigt. Zu beachten ist, dass diese Matrix wie
+leicht nachzuvollziehen ist auch „nicht sinnvolle” Werte enthält.
 
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{c|cccccccc}
-			$\Downarrow$Eissorte $\Rightarrow$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
+			$⇓$Eissorte $⇒$ Kosten & 0 & 1 & 2 & 3 & 4 & 5 &
 			6 & 7\\
 			\hline
 			Keine Sorte			& 0 & 0 & 0 & 0	 &	0 &	 0 & 0 & 0	 \\
@@ -993,15 +1282,15 @@ Die „vollständige” Matrix für das vorhergehende Beispiel wird in Tabelle \
 \label{table:Vollstaendig}
 \end{table}
 
-\section{Tests}
+\section{Uni Wien}
 
-\subsection{Uni Wien}
-
-\subsubsection{Test vom 3.10.2011}
+\subsection{Test vom 3.10.2011}
 
 \paragraph{Aufgabe 1}
 
-\subparagraph{a)} Geben Sie ein Programm in C++ artigem Pseudocode an, dessen Aufwand von der Ordnung $Ω(n)$ und $O(n²)$, aber nicht von der Ordnung $Θ(n)$ oder $Θ(n²)$ ist.
+\subparagraph{a)} Geben Sie ein Programm in C++ artigem Pseudocode an, dessen
+Aufwand von der Ordnung $Ω(n)$ und $O(n²)$, aber nicht von der Ordnung $Θ(n)$
+oder $Θ(n²)$ ist.
 
 \begin{leftbar}
 	\input{Code/Aufgabe1a_2011_10_03}
@@ -1011,7 +1300,10 @@ Aufwand: $Θ\left(n·\log\left(n\right)\right)$
 
 \subparagraph{b)}
 
-Geben Sie in C++ artigem Pseudocode eine rekursive Funktion an, deren Laufzeitordnung $Θ\left( n⁴ \log \left( n \right) \right)$ ist. Zeigen Sie mit Hilfe des Mastertheorems, dass Ihre Funktion wirklich die geforderte Laufzeitordnung hat.
+Geben Sie in C++ artigem Pseudocode eine rekursive Funktion an, deren
+Laufzeitordnung $Θ\left( n⁴ \log \left( n \right) \right)$ ist. Zeigen Sie mit
+Hilfe des Mastertheorems, dass Ihre Funktion wirklich die geforderte
+Laufzeitordnung hat.
 
 \begin{leftbar}
 	\input{Code/Aufgabe1b_2011_10_03}
@@ -1021,7 +1313,9 @@ Da $\log_b (a) = c$ ergibt sich eine Laufzeit $T(n) = n^c \log n = n^4 \log n$.
 
 \paragraph{Aufgabe 2}
 
-Addieren Sie zu Ihrer Matrikelnummer die Zahl 573296148. Die Ziffern der Summe seien in der Reihenfolge von links nach rechts in einem Array gespeichert. Sortieren Sie die Ziffern aufsteigend mit
+Addieren Sie zu Ihrer Matrikelnummer die Zahl 573296148. Die Ziffern der Summe
+seien in der Reihenfolge von links nach rechts in einem Array gespeichert.
+Sortieren Sie die Ziffern aufsteigend mit
 
 \begin{enumerate}[a.]
 	\item Counting Sort.
@@ -1029,7 +1323,8 @@ Addieren Sie zu Ihrer Matrikelnummer die Zahl 573296148. Die Ziffern der Summe s
 	\item Selection Sort.
 \end{enumerate}
 
-Geben Sie jeweils alle benötigten Zwischenschritte so genau an, dass der Ablauf des Algorithmus klar ersichtlich wird.
+Geben Sie jeweils alle benötigten Zwischenschritte so genau an, dass der
+Ablauf des Algorithmus klar ersichtlich wird.
 
 \subparagraph{a)}
 
@@ -1090,7 +1385,7 @@ Sortiertes Array (B):
 \end{center}
 
 
-%-- Bibliography ---------------------------------------------------------------
+%-- Bibliography --------------------------------------------------------------
 
 \titleformat{\section}{\sffamily\bfseries}{}{0pt}{}[{\color{aqua}\hrule}]
 
