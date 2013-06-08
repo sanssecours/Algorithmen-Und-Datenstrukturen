@@ -1,0 +1,9 @@
+projectDirectory        = '$CWD'
+windowTitle             = '$project 💻｜$displayNameRight'
+spellingLanguage        = de
+exclude                 = 'Code'
+excludeInFileChooser    = '*.{aux,graffle}'
+
+[ *.md ]
+spellChecking           = true
+spellingLanguage        = en
