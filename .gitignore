@@ -1,4 +1,5 @@
-# Ignore files created by (Xe)LaTeX
+# -- (Xe)LaTeX ----------------------------------------------------------------
+
 /*.pdf
 *.aux
 *.bbl
@@ -10,5 +11,10 @@
 *.out
 *.run.xml
 *.toc
-# Ignore files created by `highlight`
+
+# -- Other --------------------------------------------------------------------
+
+# Files created by `highlight`
 /Code/*
+# TextMate project settings
+.tm_properties
