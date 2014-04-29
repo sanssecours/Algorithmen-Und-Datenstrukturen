@@ -1,9 +1,5 @@
 projectDirectory        = '$CWD'
-windowTitle             = '$project 💻｜$displayNameRight'
-spellingLanguage        = de
+projectIcon             =  "💻"
+windowTitle             = "$project $projectIcon $displayNameRight"
 exclude                 = 'Code'
-excludeInFileChooser    = '*.{aux,graffle}'
-
-[ *.md ]
-spellChecking           = true
-spellingLanguage        = en
+excludeInFileChooser    =  '*.{aux,graffle}'
